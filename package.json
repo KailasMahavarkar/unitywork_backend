@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "nodemon",
-        "start": "npm add nodemon && node app.js",
+        "start": "npm add nodemon && node app.js --omit=dev",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
