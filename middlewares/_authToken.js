@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { isEmpty } from "../helper";
+const jwt = require('jsonwebtoken');
+const { isEmpty } = require("../helper");
 
 
 const _authToken = async (req, res, next) => {
@@ -34,4 +34,4 @@ const _authToken = async (req, res, next) => {
     }
 };
 
-export default _authToken;
+module.exports = _authToken;

@@ -1,6 +1,7 @@
-import adminNotifyTemplate from "./admin.notify.template.mjs";
-import passwordResetTemplate from "./password.reset.template.mjs";
-import verifyTemplate from "./verify.template"
+const adminNotifyTemplate = require("./admin.notify.template.js");
+const passwordResetTemplate = require("./password.reset.template.js");
+const verifyTemplate = require("./verify.template")
+
 
 const template = {
     // verify template
@@ -11,4 +12,4 @@ const template = {
     adminNotify: adminNotifyTemplate,
 }
 
-export default template;
+module.exports = template

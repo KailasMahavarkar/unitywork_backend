@@ -1,8 +1,10 @@
-import express from 'express';
-import readAllSellerGigs from '../controllers/public/readAllSellerGigs';
-import deleteGIG from '../controllers/seller/deleteGig';
-import _authToken from '../middlewares/_authToken';
+const express = require('express');
+const readAllSellerGigs = require('../controllers/public/readAllSellerGigs');
+const deleteGIG = require('../controllers/seller/deleteGig');
+const _authToken = require('../middlewares/_authToken');
+
 const router = express.Router();
+
 
 
 router.get(
@@ -17,5 +19,4 @@ router.delete(
     deleteGIG
 )
 
-
-export default router;
+module.exports = router;

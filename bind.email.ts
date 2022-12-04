@@ -1,8 +1,9 @@
 import path from "path";
 import fs from "fs";
 import { isEmpty, isWindows } from "./helper";
+import bindTemplate from "./template.bind";
 
-export type templateType = {
+type templateType = {
 	senderEmail: string;
 	subject: string;
 	receiverEmails: { email: string }[];
@@ -12,7 +13,7 @@ export type templateType = {
 	conditions: any;
 };
 
-export const templateDirectory = path.join("./templates");
+const templateDirectory = path.join("./templates");
 
 const lookup = (templateName: string) => {
 	// nodejs check file in directory4
@@ -214,4 +215,4 @@ const bindEmailTemplate = async (config: templateType) => {
 	}
 };
 
-export default bindEmailTemplate;
+module.exports = bindEmailTemplate;

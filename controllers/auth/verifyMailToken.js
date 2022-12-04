@@ -1,7 +1,6 @@
-import UserModel from "../../models/userModel";
-import { randomUUID } from "crypto";
-import TempUserModel from "../../models/tempUserModel";
-
+const UserModel = require("../../models/userModel");
+const { randomUUID } = require('crypto');
+const TempUserModel = require('../../models/tempUserModel');
 
 const mailVerify = async (req, res) => {
     // get token by params
@@ -84,4 +83,5 @@ const mailVerify = async (req, res) => {
     }
 };
 
-export default mailVerify;
+
+module.exports = mailVerify;

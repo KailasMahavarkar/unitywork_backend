@@ -1,4 +1,5 @@
-import GigModel from "../../models/gigModel";
+const GigModel = require("../../models/gigModel");
+
 
 const searchGigs = async (req, res) => {
     const query = req.query.query
@@ -36,4 +37,4 @@ const searchGigs = async (req, res) => {
     }
 }
 
-export default searchGigs;
+module.exports = searchGigs;

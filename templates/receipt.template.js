@@ -1,38 +1,38 @@
 const schema = {
-	amount: {
-		type: "number",
-	},
-	total: {
-		type: "number",
-	},
-	gst: {
-		type: "number",
-	},
-	date: {
-		type: "string",
-	},
-	company: {
-		type: "string",
-	},
-	receipt: {
-		type: "string",
-	},
-	payment: {
-		type: "string",
-	},
-	contact: {
-		type: "string",
-	},
-	email: {
-		type: "string",
-	},
+    amount: {
+        type: "number",
+    },
+    total: {
+        type: "number",
+    },
+    gst: {
+        type: "number",
+    },
+    date: {
+        type: "string",
+    },
+    company: {
+        type: "string",
+    },
+    receipt: {
+        type: "string",
+    },
+    payment: {
+        type: "string",
+    },
+    contact: {
+        type: "string",
+    },
+    email: {
+        type: "string",
+    },
     gst_number: {
         type: "string",
     }
 };
 
 const template = (config) => {
-	return `<!doctype html>
+    return `<!doctype html>
     <html ⚡4email data-css-strict>
     
     <head>
@@ -310,12 +310,10 @@ const template = (config) => {
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 18px; line-height: 25.2px;"><strong>Receipt from ${
-										config.company
-									}</strong></span></p>
-                                  <p style="font-size: 14px; line-height: 140%; text-align: center;">Receipt #${
-										config.receipt
-									}</p>
+                                  <p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 18px; line-height: 25.2px;"><strong>Receipt from ${config.company
+        }</strong></span></p>
+                                  <p style="font-size: 14px; line-height: 140%; text-align: center;">Receipt #${config.receipt
+        }</p>
                                 </div>
     
                               </td>
@@ -344,9 +342,8 @@ const template = (config) => {
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: center; word-wrap: break-word;">
                                   <p style="font-size: 14px; line-height: 140%;">Amount Paid</p>
-                                  <p style="font-size: 14px; line-height: 140%;">${
-										config.total
-									}₹</p>
+                                  <p style="font-size: 14px; line-height: 140%;">${config.total
+        }₹</p>
                                 </div>
     
                               </td>
@@ -367,10 +364,9 @@ const template = (config) => {
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: center; word-wrap: break-word;">
                                   <p style="font-size: 14px; line-height: 140%;">Date Paid</p>
-                                  <p style="font-size: 14px; line-height: 140%;">${
-										config.date ||
-										Date.now().toLocaleString()
-									}</p>
+                                  <p style="font-size: 14px; line-height: 140%;">${config.date ||
+        Date.now().toLocaleString()
+        }</p>
                                 </div>
     
                               </td>
@@ -391,9 +387,8 @@ const template = (config) => {
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: center; word-wrap: break-word;">
                                   <p style="font-size: 14px; line-height: 140%;">Payment Method</p>
-                                  <p style="font-size: 14px; line-height: 140%;">${
-										config.payment
-									}</p>
+                                  <p style="font-size: 14px; line-height: 140%;">${config.payment
+        }</p>
                                 </div>
     
                               </td>
@@ -471,9 +466,8 @@ const template = (config) => {
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 60px 10px 10px;font-family:arial,helvetica,sans-serif;" align="left">
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: right; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;">${
-										config.amount
-									}₹</p>
+                                  <p style="font-size: 14px; line-height: 140%;">${config.amount
+        }₹</p>
                                 </div>
     
                               </td>
@@ -521,9 +515,8 @@ const template = (config) => {
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 60px 10px 10px;font-family:arial,helvetica,sans-serif;" align="left">
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: right; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;">${
-										config.gst
-									}₹</p>
+                                  <p style="font-size: 14px; line-height: 140%;">${config.gst
+        }₹</p>
                                 </div>
     
                               </td>
@@ -571,9 +564,8 @@ const template = (config) => {
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 60px 10px 10px;font-family:arial,helvetica,sans-serif;" align="left">
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: right; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><strong>${
-										config.total
-									}₹</strong></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><strong>${config.total
+        }₹</strong></p>
                                 </div>
     
                               </td>
@@ -613,11 +605,9 @@ const template = (config) => {
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 60px;font-family:arial,helvetica,sans-serif;" align="left">
     
                                 <div class="v-text-align" style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><span style="color: #ced4d9; font-size: 14px; line-height: 19.6px;">if you have any questions, kindly contact us at <a rel="noopener" href="mailto:orkaitsolutions@gmail.com" target="_blank" style="color: #ced4d9;">${
-										config.email
-									}</a> or call at ${
-		config.contact
-	}</span></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><span style="color: #ced4d9; font-size: 14px; line-height: 19.6px;">if you have any questions, kindly contact us at <a rel="noopener" href="mailto:orkaitsolutions@gmail.com" target="_blank" style="color: #ced4d9;">${config.email
+        }</a> or call at ${config.contact
+        }</span></p>
                                 </div>
     
                               </td>
@@ -737,10 +727,8 @@ const template = (config) => {
     </html>`;
 };
 
-const toExport = {
-	schema: schema,
-	template: template,
-	conditions: {},
+module.exports = {
+    schema: schema,
+    template: template,
+    conditions: {},
 };
-
-export default toExport;

@@ -1,6 +1,7 @@
 // connection to database
-import mongoose from "mongoose";
-import env from "./env";
+const mongoose = require('mongoose');
+const env = require("./env");
+
 let conn;
 
 const connect = async () => {
@@ -28,4 +29,4 @@ const connect = async () => {
     return conn;
 };
 
-export default connect;
+module.exports = connect;

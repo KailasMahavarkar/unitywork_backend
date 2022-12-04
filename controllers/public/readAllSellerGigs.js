@@ -1,5 +1,5 @@
-import UserModel from "../../models/userModel";
-import GigModel from "../../models/gigModel";
+const UserModel = require("../../models/userModel");
+const GigModel = require("../../models/gigModel");
 
 const readAllSellerGigs = async (req, res) => {
 
@@ -56,4 +56,5 @@ const readAllSellerGigs = async (req, res) => {
 
 }
 
-export default readAllSellerGigs;
+
+module.exports = readAllSellerGigs

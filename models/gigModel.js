@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
-import { gigCategoryEnum, gigStatusEnum, gigTagsEnum } from './data';
-import mongoosePaginate from 'mongoose-paginate-v2';
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
+const { ObjectId } = mongoose.Schema.Types;
 
+const { gigCategoryEnum, gigStatusEnum } = require('./data');
 
 const gigSchema = new mongoose.Schema({
     _id: {
@@ -137,4 +138,4 @@ gigSchema.plugin(mongoosePaginate);
 // create index for apikey
 const GigModel = mongoose.model('Gig', gigSchema);
 
-export default GigModel
+module.exports = GigModel;

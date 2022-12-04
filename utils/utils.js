@@ -11,6 +11,6 @@ const isEmpty = (arg) => {
 	return false;
 };
 
-export default {
-    isEmpty
-};
+module.exports = {
+    isEmpty,
+}

@@ -1,14 +1,15 @@
-import express from 'express';
-import dotenv from 'dotenv';
+const express = require('express');
+const dotenv = require('dotenv');
+
 dotenv.config();
 
-import './env';
-import publicRoutes from './routes/publicRoutes';
-import privateRoutes from './routes/privateRoutes';
+const publicRoutes = require("./routes/publicRoutes");
+const privateRoutes = require("./routes/privateRoutes");
 
-import connect from './connect';
-import _authToken from './middlewares/_authToken';
-import cors from 'cors';
+
+const connect = require('./connect');
+const _authToken = require('./middlewares/_authToken');
+const cors = require('cors');
 
 
 // create express instance

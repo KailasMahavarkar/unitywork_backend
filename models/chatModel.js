@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types;
 
 const chatModelSchema = {
     _id: { type: mongoose.Types.ObjectId, auto: true },
@@ -44,4 +45,5 @@ const chatModelSchema = {
 
 // create index for apikey
 const ChatModel = mongoose.model('Chat', chatModelSchema);
-export default ChatModel;
+
+module.exports = ChatModel;

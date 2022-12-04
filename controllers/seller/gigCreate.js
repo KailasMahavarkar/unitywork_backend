@@ -1,7 +1,8 @@
-import GigModel from "../../models/gigModel";
-import UserModel from "../../models/userModel";
-import { gigAJV, handleAJVError } from "../ajvHelper";
-import { v4 as uuidv4 } from 'uuid';
+const GigModel = require("../../models/gigModel");
+const UserModel = require("../../models/userModel");
+const { gigAJV, handleAJVError } = require("../ajvHelper");
+const { v4: uuidv4 } = require('uuid');
+
 
 const gigCreate = async (req, res) => {
 
@@ -87,4 +88,4 @@ const gigCreate = async (req, res) => {
 
 }
 
-export default gigCreate;
+module.exports = gigCreate;

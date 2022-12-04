@@ -1,6 +1,6 @@
-import { v2 as cloudinary } from "cloudinary";
-import { createReadStream } from "streamifier";
-import env from "../env";
+const cloudinary = require('cloudinary').v2
+const { createReadStream } = require('streamifier');
+const env = require('../env');
 
 
 const _singleFileUpload = async (req, res, next) => {
@@ -53,4 +53,4 @@ const _singleFileUpload = async (req, res, next) => {
 };
 
 
-export default _singleFileUpload
+module.exports = _singleFileUpload;

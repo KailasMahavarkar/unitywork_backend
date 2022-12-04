@@ -1,4 +1,4 @@
-import GigModel from '../../models/gigModel';
+const GigModel = require('../../models/gigModel')
 
 const gigListing = async (req, res) => {
 
@@ -43,4 +43,4 @@ const gigListing = async (req, res) => {
 }
 
 
-export default gigListing;
+module.exports = gigListing

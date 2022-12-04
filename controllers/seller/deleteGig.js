@@ -1,4 +1,5 @@
-import GigModel from "../../models/gigModel";
+// convert import to commonjs
+const GigModel = require("../../models/gigModel");
 
 
 const deleteGIG = async (req, res) => {
@@ -36,4 +37,4 @@ const deleteGIG = async (req, res) => {
 
 }
 
-export default deleteGIG;
+module.exports = deleteGIG;

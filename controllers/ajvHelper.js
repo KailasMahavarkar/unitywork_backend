@@ -1,8 +1,9 @@
 // FILE INTRO: This file contains logic for pre-route schema validations
 
-import AJV from 'ajv';
-import { gigCategoryEnum } from '../models/data';
-export const ajv = new AJV()
+const AJV = require('ajv');
+const { gigCategoryEnum } = require('../models/data');
+
+const ajv = new AJV()
 
 const baseGigValidatorObject = {
     type: "object",
@@ -34,19 +35,19 @@ const baseRegisterObject = {
             type: "string",
             minLength: 3
         },
-        lastname: { 
+        lastname: {
             type: "string",
             minLength: 3
         },
-        username: { 
+        username: {
             type: "string",
-            minLength: 3 
+            minLength: 3
         },
     },
     required: ["email", "password", "firstname", "lastname", "username"],
 }
 
-export const gigSchema = {
+const gigSchema = {
     create: {
         type: "object",
         properties: {
@@ -74,13 +75,13 @@ export const gigSchema = {
 }
 
 
-export const authSchema = {
+const authSchema = {
     login: baseLoginObject,
     register: baseRegisterObject,
 }
 
-// export validators
-export const gigAJV = {
+// validators
+const gigAJV = {
     gigCreate: (data) => ajv.validate(gigSchema.create, data),
     gigRead: (data) => ajv.validate(gigSchema.read, data),
     gigUpdate: (data) => ajv.validate(gigSchema.update, data),
@@ -89,14 +90,14 @@ export const gigAJV = {
 
 
 // auth validators
-export const authAJV = {
+const authAJV = {
     login: (data) => ajv.validate(authSchema.login, data),
     register: (data) => ajv.validate(authSchema.register, data),
 }
 
 
 
-export const handleAJVError = (res) => {
+const handleAJVError = (res) => {
 
     const ajvError = ajv.errors?.map((err) => {
         return {
@@ -111,4 +112,12 @@ export const handleAJVError = (res) => {
         status: "failed",
         errors: ajvError
     })
+}
+
+module.exports = {
+    ajv,
+    gigAJV,
+    authAJV,
+    gigSchema,
+    handleAJVError
 }

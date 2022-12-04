@@ -1,14 +1,14 @@
-export const gigCategoryEnum = [
+const gigCategoryEnum = [
     'support', 'general', 'programming',
     'feature', 'error', 'debugging'
 ]
-export const gigStatusEnum = [
+const gigStatusEnum = [
     'draft', 'active', 'paused',
     'banned', 'deleted'
 ]
 
 
-export const gigTagsEnum = [
+const gigTagsEnum = [
     'website-development',
     'website-design',
     'website-maintenance',
@@ -151,3 +151,9 @@ export const gigTagsEnum = [
 
 
 ]
+
+module.exports = {
+    gigCategoryEnum,
+    gigStatusEnum,
+    gigTagsEnum
+}

@@ -1,5 +1,5 @@
-import SibApiV3Sdk from "sib-api-v3-sdk";
-import env from "./env";
+const SibApiV3Sdk = require('sib-api-v3-sdk');
+const env = require('./env');
 
 // expected emailTYPE
 // {
@@ -58,4 +58,4 @@ async function sendEmail(config) {
     }
 }
 
-export default sendEmail;
+module.exports = sendEmail;

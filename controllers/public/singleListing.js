@@ -1,4 +1,7 @@
-import GigModel from "../../models/gigModel";
+const GigModel = require("../../models/gigModel");
+
+
+
 const singleListing = async (req, res) => {
     try {
         const gigId = req.params.gigId || req.params.id
@@ -27,4 +30,4 @@ const singleListing = async (req, res) => {
     }
 }
 
-export default singleListing;
+module.exports = singleListing

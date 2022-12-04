@@ -1,8 +1,8 @@
-import UserModel from "../../models/userModel";
-import { isEmpty, randomToken, runDev, showError, withMode } from "../../helper";
-import bindTemplate from "../../template.bind";
-import sendEmail from "../../mailer";
-import env from "../../env";
+const UserModel = require("../../models/userModel");
+const { isEmpty, randomToken, runDev, showError, withMode } = require("../../helper");
+const bindTemplate = require("../../template.bind");
+const sendEmail = require("../../mailer");
+const env = require("../../env");
 
 
 const sendVerificationMail = async (token, email) => {
@@ -69,5 +69,5 @@ const userRegister = async (req, res) => {
     }
 };
 
-export default userRegister;
 
+module.exports = userRegister;

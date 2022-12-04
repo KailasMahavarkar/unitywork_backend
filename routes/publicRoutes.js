@@ -1,16 +1,15 @@
-import express from 'express';
+const express = require('express');
+const userRegister = require("../controllers/auth/userRegister");
+const userLogin = require("../controllers/auth/userLogin");
+const mailVerify = require('../controllers/auth/verifyMailToken');
 
-import userRegister from "../controllers/auth/userRegister";
-import userLogin from "../controllers/auth/userLogin";
-import mailVerify from '../controllers/auth/verifyMailToken';
-import readAllSellerGigs from '../controllers/public/readAllSellerGigs';
-import readSellerInfo from '../controllers/public/readSellerInfo';
-import gigListing from '../controllers/public/gigListing';
+const readAllSellerGigs = require('../controllers/public/readAllSellerGigs');
+const gigListing = require('../controllers/public/gigListing');
 
-import _singleFileUpload from '../middlewares/_singleFileUpload';
-import multer from 'multer';
-import singleListing from '../controllers/public/singleListing';
-import searchGigs from '../controllers/public/searchGigs';
+const _singleFileUpload = require('../middlewares/_singleFileUpload');
+const multer = require('multer');
+const singleListing = require('../controllers/public/singleListing');
+const searchGigs = require('../controllers/public/searchGigs');
 
 
 const upload = multer({})
@@ -25,7 +24,6 @@ router.post('/auth/mailverify', mailVerify);
 
 // public routes for NON-login user
 router.get('/api/seller/:sellerId/gigs', readAllSellerGigs);
-router.get('/api/seller/:sellerId/info', readSellerInfo);
 
 
 // gig based routes
@@ -49,4 +47,4 @@ router
     });
 
 
-export default router;
+module.exports = router;

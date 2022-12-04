@@ -1,5 +1,5 @@
-import { ajv, gigAJV } from "../ajvHelper";
-import GigModel from "../../models/gigModel";
+const { ajv, gigAJV } = require("../ajvHelper");
+const GigModel = require("../../models/gigModel");
 
 const updateGIG = async (req, res) => {
 
@@ -50,4 +50,4 @@ const updateGIG = async (req, res) => {
 }
 
 
-export default updateGIG;
+module.exports = updateGIG;

@@ -1,4 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types;
+
 
 const tempUserSchema = {
     _id: { type: mongoose.Types.ObjectId, auto: true },
@@ -65,4 +67,5 @@ const tempUserSchema = {
 
 // create index for apikey
 const TempUserModel = mongoose.model('temp', tempUserSchema);
-export default TempUserModel;
+
+module.exports = TempUserModel;

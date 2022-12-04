@@ -1,32 +1,32 @@
 const schema = {
-	company: {
-		type: "string",
-	},
-	username: {
-		type: "string",
-	},
-	merchant: {
-		type: "string",
-	},
-	amount: {
-		type: "string",
-	},
-	withdrawal_id: {
-		type: "string",
-	},
+    company: {
+        type: "string",
+    },
+    username: {
+        type: "string",
+    },
+    merchant: {
+        type: "string",
+    },
+    amount: {
+        type: "string",
+    },
+    withdrawal_id: {
+        type: "string",
+    },
 };
 
 const conditions = {
-	showNote: {
-		required: true,
-	},
-	showTemp: {
-		required: false,
-	},
+    showNote: {
+        required: true,
+    },
+    showTemp: {
+        required: false,
+    },
 };
 
 const payoutTemplate = (config, conditions) => {
-	return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
     <!--[if gte mso 9]>
@@ -255,20 +255,16 @@ const payoutTemplate = (config, conditions) => {
       <h2 style="margin: 0px; color: #000000; line-height: 140%; text-align: left; word-wrap: break-word; font-weight: normal; font-family: arial,helvetica,sans-serif; font-size: 15px;">
         <strong>Hi ${config.username}</strong>
         <br /><br />
-        We have good news, You revenue in the amount of ${
-			config.amount
-		}, was sent to your ${
-		config.merchant
-	} account. It may take a 1-5 days for your funds to appear in your ${
-		config.merchant
-	} balance.
+        We have good news, You revenue in the amount of ${config.amount
+        }, was sent to your ${config.merchant
+        } account. It may take a 1-5 days for your funds to appear in your ${config.merchant
+        } balance.
         <br /><br />
         Withdrawal Transaction No ${config.withdrawal_id}
-        ${
-			conditions.showNote
-				? `<br /><br /> Note: ${config.merchant} charges a fee per each withdrawal.`
-				: ""
-		}
+        ${conditions.showNote
+            ? `<br /><br /> Note: ${config.merchant} charges a fee per each withdrawal.`
+            : ""
+        }
        
       </h2>
     
@@ -304,9 +300,8 @@ const payoutTemplate = (config, conditions) => {
           <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
             
       <div style="line-height: 160%; text-align: center; word-wrap: break-word;">
-        <p style="font-size: 14px; line-height: 160%;">Copyrights &copy;${
-			config.company
-		} All Rights Reserved</p>
+        <p style="font-size: 14px; line-height: 160%;">Copyrights &copy;${config.company
+        } All Rights Reserved</p>
       </div>
     
           </td>
@@ -336,10 +331,8 @@ const payoutTemplate = (config, conditions) => {
     </html>`;
 };
 
-const payoutEngine = {
-	schema: schema,
-	template: payoutTemplate,
-	conditions: conditions,
-};
-
-export default payoutEngine;
+module.exports = {
+    schema: schema,
+    template: payoutTemplate,
+    conditions: conditions,
+}

@@ -1,15 +1,13 @@
-import User from "../../models/userModel";
-import refreshToken from "../../models/refreshTokenModel";
+const User = require("../../models/userModel");
+const refreshToken = require('../../models/refreshTokenModel');
+const { authAJV, handleAJVError } = require("../ajvHelper");
 
-// import hashing and jwt modules
-import jwt from "jsonwebtoken";
+const jwt = require('jsonwebtoken');
+const env = require('../../env');
 
-// import env
-import env from "../../env";
-import { authAJV, handleAJVError } from "../ajvHelper";
 
 // generate new access token
-export const generateAccessToken = (payload) => {
+const generateAccessToken = (payload) => {
     delete payload.password;
     delete payload.payment;
     delete payload.pastes;
@@ -20,7 +18,7 @@ export const generateAccessToken = (payload) => {
 };
 
 // generate new refresh token
-export const generateRefreshToken = (payload) => {
+const generateRefreshToken = (payload) => {
     delete payload.password;
     delete payload.payment;
     delete payload.pastes;
@@ -31,14 +29,14 @@ export const generateRefreshToken = (payload) => {
 };
 
 // generate new access token for admin
-export const generateAdminAccessToken = (payload) => {
+const generateAdminAccessToken = (payload) => {
     return jwt.sign(payload, env.ADMIN_ACCESS_TOKEN_SECRET, {
         expiresIn: env.ADMIN_ACCESS_TOKEN_EXPIRY,
     });
 };
 
 // generate new refresh token
-export const generateAdminRefreshToken = (payload) => {
+const generateAdminRefreshToken = (payload) => {
     return jwt.sign(payload, env.ADMIN_REFRESH_TOKEN_SECRET, {
         expiresIn: env.ADMIN_REFRESH_TOKEN_EXPIRY,
     });
@@ -52,10 +50,10 @@ const userLogin = async (req, res) => {
             return handleAJVError(res);
         }
 
-        
+
         const username = body.username;
         let password = body.password;
-        
+
         console.log(username);
         const userInfo = await User.findOne({
             username: username,
@@ -117,4 +115,14 @@ const userLogin = async (req, res) => {
     }
 };
 
-export default userLogin;
+
+module.exports = {
+    userLogin,
+    generateAccessToken,
+    generateRefreshToken,
+    generateAdminAccessToken,
+    generateAdminRefreshToken,
+}
+
+
+module.exports = userLogin;

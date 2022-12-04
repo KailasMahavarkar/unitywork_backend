@@ -1,4 +1,5 @@
-import mongoose, { ObjectId } from 'mongoose';
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types;
 
 const userSchema = {
     _id: { type: ObjectId, auto: true },
@@ -105,4 +106,4 @@ const userSchema = {
 
 // create index for apikey
 const UserModel = mongoose.model('User', userSchema);
-export default UserModel;
+module.exports = UserModel;

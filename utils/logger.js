@@ -1,4 +1,4 @@
-import kleur from 'kleur';
+const kleur = require('kleur');
 
 /*
     DRAGON[RED]     -> SUPER HIGH LEVEL -> FATAL ERROR
@@ -63,4 +63,4 @@ const mylogger = (filepath) => {
 };
 
 
-export default mylogger;
+module.exports = mylogger;

@@ -1,14 +1,15 @@
-import env from "./env";
-import { v4 as uuidv4 } from 'uuid';
+const env = require('./env');
+const uuidv4 = require('uuid').v4;
 
-export const isWindows = env.MACHINE === "windows";
 
-export const getQuery = (req) => {
+const isWindows = env.MACHINE === "windows";
+
+const getQuery = (req) => {
     return JSON.parse(JSON.stringify(req.query));
 };
 
 // generate crypto safe random string
-export function randomToken() {
+function randomToken() {
     return uuidv4().replace(/-/g, '')
 }
 
@@ -30,10 +31,10 @@ const modeRunMaker = () => {
     return inner;
 };
 
-export const runDev = modeRunMaker("dev");
-export const runProd = modeRunMaker("prod");
+const runDev = modeRunMaker("dev");
+const runProd = modeRunMaker("prod");
 
-export const withMode = (object) => {
+const withMode = (object) => {
     if (env.MODE === "prod" || env.MODE === "PROD") {
         return object.prod;
     } else {
@@ -42,7 +43,7 @@ export const withMode = (object) => {
 };
 
 
-export const fakeNumString = (length = 5) => {
+const fakeNumString = (length = 5) => {
     const inner = (length) => {
         let temp = "";
         for (let x = 0; x <= length; x++) {
@@ -53,22 +54,12 @@ export const fakeNumString = (length = 5) => {
     return inner(length);
 };
 
-export function stringContains(str, text) {
+function stringContains(str, text) {
     return str.indexOf(text) > -1;
 }
 
-// const is = {
-// 	arr: (a) => Array.isArray(a),
-// 	obj: (a) => stringContains(Object.prototype.toString.call(a), "Object"),
-// 	pth: (a) => is.obj(a) && a.hasOwnProperty("totalLength"),
-// 	str: (a) => typeof a === "string",
-// 	fnc: (a) => typeof a === "function",
-// 	und: (a) => typeof a === "undefined",
-// 	nil: (a) => is.und(a) || a === null,
-// 	hex: (a) => /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a),
-// };
 
-export const isEmpty = (arg) => {
+const isEmpty = (arg) => {
     try {
         if (arg == null) {
             return true;
@@ -85,7 +76,7 @@ export const isEmpty = (arg) => {
     }
 };
 
-export const showError = (error) => {
+const showError = (error) => {
     return {
         exists: true,
         error: {
@@ -95,7 +86,7 @@ export const showError = (error) => {
     };
 };
 
-export const showAJVErrors = (errors) => {
+const showAJVErrors = (errors) => {
     if (!errors) {
         return {
             key: "Unknown Key",
@@ -111,6 +102,24 @@ export const showAJVErrors = (errors) => {
         };
     });
 };
+
+module.exports = {
+    isWindows,
+    getQuery,
+    randomToken,
+    runDev,
+    runProd,
+    withMode,
+    fakeNumString,
+    stringContains,
+    isEmpty,
+    showError,
+    showAJVErrors,
+}
+
+
+
+
 
 
 

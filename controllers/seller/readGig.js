@@ -1,7 +1,5 @@
-import GigModel from "../../models/gigModel";
-import { gigAJV, handleAJVError, ajv } from "../ajvHelper";
-
-
+const GigModel = require("../../models/gigModel");
+const { gigAJV, handleAJVError, ajv } = require("../ajvHelper");
 
 const readGIG = async (req, res) => {
     const data = req.body;
@@ -54,4 +52,5 @@ const readGIG = async (req, res) => {
 
 }
 
-export default readGIG;
+
+module.exports = readGIG;

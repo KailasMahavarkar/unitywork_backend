@@ -1,11 +1,12 @@
-import UserModel from "../../models/userModel";
 
-import { isEmpty, randomToken, runDev, showError, withMode } from "../../helper";
-import TempUserModel from "../../models/tempUserModel";
-import bindTemplate from "../../template.bind";
-import sendEmail from "../../mailer";
-import env from "../../env";
-import { ajv, authAJV, handleAJVError } from "../ajvHelper";
+const UserModel = require("../../models/userModel");
+const { isEmpty, randomToken, runDev, showError, withMode } = require("../../helper");
+const TempUserModel = require("../../models/tempUserModel");
+const bindTemplate = require("../../template.bind");
+const sendEmail = require("../../mailer");
+const env = require("../../env");
+const { authAJV, handleAJVError } = require("../ajvHelper");
+
 
 const MAIL_OTP_EXPIRY_IN_MINS = 5;
 const USER_BAN_TIME_IN_MINS = 20;
@@ -172,5 +173,6 @@ const userRegister = async (req, res) => {
     }
 };
 
-export default userRegister;
+
+module.exports = userRegister;
 
