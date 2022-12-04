@@ -59,8 +59,10 @@ app.get("*", (req, res) => {
 
 
 // listen server to port
-app.listen(process.env.PORT || 80, async () => {
-    console.log("server is listening to port 2000");
+
+const PORT = process.env.PORT || 80;
+app.listen(PORT, async () => {
+    console.log(`server is listening to port ${PORT}`);
     await connect();
 })
 
