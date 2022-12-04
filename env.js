@@ -1,7 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-
 const env = {
     MODE: process.env.MODE,
     EMAIL_MODE: process.env.EMAIL_MODE,

@@ -1,4 +1,7 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+
 import './env';
 import publicRoutes from './routes/publicRoutes';
 import privateRoutes from './routes/privateRoutes';
@@ -47,9 +50,6 @@ app.use('/', publicRoutes);
 app.use('/', privateRoutes);
 
 
-
-
-
 // catch all route
 app.get("*", (req, res) => {
     return res.status(404).send({
@@ -59,8 +59,7 @@ app.get("*", (req, res) => {
 
 
 // listen server to port
-
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 2000;
 app.listen(PORT, async () => {
     console.log(`server is listening to port ${PORT}`);
     await connect();

@@ -6,7 +6,7 @@
     "type": "module",
 	"scripts": {
 		"dev": "nodemon",
-        "start": "npm add nodemon && node app.js --omit=dev",
+        "start": "node app.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
