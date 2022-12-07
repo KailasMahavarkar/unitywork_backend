@@ -29,7 +29,7 @@ async function sendEmail(config) {
     const sendSmtpEmail = {
         sender: {
             email: config.senderEmail,
-            name: "Pastekey.io"
+            name: config.company
         },
         to: config.receiverEmails,
         subject: config.subject,

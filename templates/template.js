@@ -4,12 +4,9 @@ const verifyTemplate = require("./verify.template")
 
 
 const template = {
-    // verify template
     verify: verifyTemplate,
-    // admin notify template
-    passwordReset: passwordResetTemplate,
-    // admin notify template
-    adminNotify: adminNotifyTemplate,
+    reset: passwordResetTemplate,
+    notify: adminNotifyTemplate,
 }
 
 module.exports = template

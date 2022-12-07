@@ -1,46 +1,9 @@
 const User = require("../../models/userModel");
 const refreshToken = require('../../models/refreshTokenModel');
 const { authAJV, handleAJVError } = require("../ajvHelper");
-
-const jwt = require('jsonwebtoken');
-const env = require('../../env');
+const { generateAccessToken, generateRefreshToken } = require('../auth/auth');
 
 
-// generate new access token
-const generateAccessToken = (payload) => {
-    delete payload.password;
-    delete payload.payment;
-    delete payload.pastes;
-
-    return jwt.sign(payload, env.ACCESS_TOKEN_SECRET, {
-        expiresIn: env.ACCESS_TOKEN_EXPIRY,
-    });
-};
-
-// generate new refresh token
-const generateRefreshToken = (payload) => {
-    delete payload.password;
-    delete payload.payment;
-    delete payload.pastes;
-
-    return jwt.sign(payload, env.REFRESH_TOKEN_SECRET, {
-        expiresIn: env.REFRESH_TOKEN_EXPIRY,
-    });
-};
-
-// generate new access token for admin
-const generateAdminAccessToken = (payload) => {
-    return jwt.sign(payload, env.ADMIN_ACCESS_TOKEN_SECRET, {
-        expiresIn: env.ADMIN_ACCESS_TOKEN_EXPIRY,
-    });
-};
-
-// generate new refresh token
-const generateAdminRefreshToken = (payload) => {
-    return jwt.sign(payload, env.ADMIN_REFRESH_TOKEN_SECRET, {
-        expiresIn: env.ADMIN_REFRESH_TOKEN_EXPIRY,
-    });
-};
 
 const userLogin = async (req, res) => {
     try {
@@ -118,10 +81,6 @@ const userLogin = async (req, res) => {
 
 module.exports = {
     userLogin,
-    generateAccessToken,
-    generateRefreshToken,
-    generateAdminAccessToken,
-    generateAdminRefreshToken,
 }
 
 

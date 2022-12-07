@@ -1,10 +1,9 @@
 
 const UserModel = require("../../models/userModel");
-const { isEmpty, randomToken, runDev, showError, withMode } = require("../../helper");
+const { randomToken, runDev, showError, withMode } = require("../../helper");
 const TempUserModel = require("../../models/tempUserModel");
 const bindTemplate = require("../../template.bind");
 const sendEmail = require("../../mailer");
-const env = require("../../env");
 const { authAJV, handleAJVError } = require("../ajvHelper");
 
 
@@ -21,6 +20,7 @@ const sendVerificationMail = async (token, email) => {
             prod: `https://unitywork.io/register?mailtoken=${token}`,
         }),
     });
+
 
     // send email to user
     return await sendEmail({
@@ -54,30 +54,27 @@ const userRegister = async (req, res) => {
 
 
     try {
-        // if usernameMatch is not empty ? already exists username : continue
-        const usernameMatch = await UserModel.findOne({
-            username: username,
+        // check if user exists
+        const user = await UserModel.findOne({
+            $or: [
+                {
+                    username: username
+                },
+                {
+                    email: email
+                }
+            ]
         });
-        if (!isEmpty(usernameMatch)) {
+
+
+        if (user?._id) {
             return res.status(400).send({
                 status: "failed",
-                msg: "Username already exists",
+                msg: "Username or Email already exists",
             });
         }
 
-        // if emailCheck is not empty ? already exists email : continue
-        const emailCheck = await UserModel.findOne({
-            email: email,
-        });
-
-        if (!isEmpty(emailCheck)) {
-            return res.status(400).send({
-                msg: "Email is linked with another username",
-                status: "failed",
-            });
-        }
-
-        const token = randomToken()
+        const token = randomToken();
         const findResult = await TempUserModel.findOne({
             email: email,
         });
@@ -152,9 +149,7 @@ const userRegister = async (req, res) => {
         }
 
         // send mail
-        if (env.EMAIL_MODE === "prod") {
-            await sendVerificationMail(token, email);
-        }
+        await sendVerificationMail(token, email);
 
         return res.status(200).send({
             msg: "Verification mail sent",

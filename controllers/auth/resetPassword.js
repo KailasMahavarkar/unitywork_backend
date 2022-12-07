@@ -1,19 +1,20 @@
 const UserModel = require("../../models/userModel");
-const { isEmpty, randomToken, runDev, showError, withMode } = require("../../helper");
+const { randomToken, runDev, showError, withMode } = require("../../helper");
 const bindTemplate = require("../../template.bind");
 const sendEmail = require("../../mailer");
-const env = require("../../env");
+// const env = require("../../env");
 
 
-const sendVerificationMail = async (token, email) => {
+const sendPasswordOTP = async (token, email) => {
     // bind email template
-    const bindedTemplate = await bindTemplate("verify", {
+    const bindedTemplate = await bindTemplate("reset", {
         company: "unitywork.io",
         href: withMode({
-            dev: `http://localhost:3000/register?mailtoken=${token}`,
-            prod: `https://unitywork.io/register?mailtoken=${token}`,
+            dev: `http://localhost:3000/password-reset?token=${token}`,
+            prod: `https://unitywork.io/password-reset?token=${token}`,
         }),
     });
+
 
     // send email to user
     return await sendEmail({
@@ -30,33 +31,42 @@ const sendVerificationMail = async (token, email) => {
     });
 };
 
-const userRegister = async (req, res) => {
+const resetPassword = async (req, res) => {
     const email = req.body.email;
-    const username = req.body.username;
+    // const username = req.body.username;
+
+    // generate a random password
+    const resetToken = randomToken();
 
 
     try {
-        const user = await UserModel.exists({
-            username: username,
+        const user = await UserModel.findOne({
             email: email
+        }, {
+            email: 1
         });
-        if (!isEmpty(usernameMatch)) {
+
+        if (!user?._id) {
             return res.status(400).send({
+                msg: "email does not exists in database",
                 status: "failed",
-                msg: "Username already exists",
             });
         }
 
-        // send mail
-        if (env.EMAIL_MODE === "prod") {
-            await sendVerificationMail(token, email);
-        }
+        // attach random password to user
+        user.resetToken = resetToken;
+
+        // save user
+        await user.save();
+
+        // send email to user
+        await sendPasswordOTP(resetToken, email);
 
         return res.status(200).send({
             msg: "Verification mail sent",
             status: "success",
             dev: runDev({
-                token: token,
+                token: resetToken,
             })
         });
 
@@ -70,4 +80,6 @@ const userRegister = async (req, res) => {
 };
 
 
-module.exports = userRegister;
+// module.exports = userRegister;
+
+module.exports = resetPassword;

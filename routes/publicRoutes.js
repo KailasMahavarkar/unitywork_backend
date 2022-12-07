@@ -10,7 +10,8 @@ const _singleFileUpload = require('../middlewares/_singleFileUpload');
 const multer = require('multer');
 const singleListing = require('../controllers/public/singleListing');
 const searchGigs = require('../controllers/public/searchGigs');
-
+const renewToken = require("../controllers/auth/renewToken");
+const resetPassword = require('../controllers/auth/resetPassword');
 
 const upload = multer({})
 const router = express.Router();
@@ -20,6 +21,8 @@ const router = express.Router();
 router.post('/auth/register', userRegister);
 router.post('/auth/login', userLogin);
 router.post('/auth/mailverify', mailVerify);
+router.post('/auth/refresh', renewToken);
+router.post('/auth/reset', resetPassword);
 
 
 // public routes for NON-login user

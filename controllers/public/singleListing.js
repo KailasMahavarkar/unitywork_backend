@@ -1,14 +1,14 @@
 const GigModel = require("../../models/gigModel");
 
-
-
 const singleListing = async (req, res) => {
     try {
         const gigId = req.params.gigId || req.params.id
 
+        // using lean mode to find id
         const gig = await GigModel.findById({
-            _id: gigId
-        });
+            _id: gigId,
+        })
+
 
         if (!gig) {
             return res.status(404).send({

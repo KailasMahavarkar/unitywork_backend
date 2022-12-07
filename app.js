@@ -8,8 +8,8 @@ const privateRoutes = require("./routes/privateRoutes");
 
 
 const connect = require('./connect');
-const _authToken = require('./middlewares/_authToken');
 const cors = require('cors');
+const compression = require('compression');
 
 
 // create express instance
@@ -20,6 +20,21 @@ app.use(express.json({ limit: "1mb" }));
 app.set('json spaces', 4);
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// use compression
+app.use(compression());
+
+// handle json error
+app.use(function (error, req, res, next) {
+    if (error instanceof SyntaxError) {
+        return res.status(400).json({
+            msg: "failed to parse JSON body",
+            status: "failed"
+        })
+    } else {
+        return next();
+    }
+});
 
 app.use((req, res, next) => {
     res.locals = {

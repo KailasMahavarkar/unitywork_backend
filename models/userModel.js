@@ -17,6 +17,12 @@ const userSchema = {
         unique: true,
     },
 
+    country: {
+        type: String,
+        required: true,
+        default: "india"
+    },
+
     status: {
         type: String,
         required: true,
@@ -56,6 +62,12 @@ const userSchema = {
         type: Array,
         required: false,
         default: [],
+    },
+
+    resetToken: {
+        type: String,
+        required: false,
+        default: "",
     },
 
     // social schema

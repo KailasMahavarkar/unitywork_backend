@@ -7,6 +7,13 @@ const gigStatusEnum = [
     'banned', 'deleted'
 ]
 
+const gigTimeEnum = [
+    '1 day', '2 days', '3 days',
+    '4 days', '5 days', '6 days',
+    '7 days', '15 days', '30 days',
+    '45 days', '60 days', '75 days',
+    '90 days'
+]
 
 const gigTagsEnum = [
     'website-development',
@@ -155,5 +162,6 @@ const gigTagsEnum = [
 module.exports = {
     gigCategoryEnum,
     gigStatusEnum,
-    gigTagsEnum
+    gigTagsEnum,
+    gigTimeEnum
 }

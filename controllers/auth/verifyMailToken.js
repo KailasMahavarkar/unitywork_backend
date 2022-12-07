@@ -4,7 +4,7 @@ const TempUserModel = require('../../models/tempUserModel');
 
 const mailVerify = async (req, res) => {
     // get token by params
-    const token = req.body.token;
+    const token = req.body.token || req.body.mailtoken;
 
     // checks token -> isEmpty || invalid length || invalid type
     if (typeof token !== "string" || token.length !== 32) {
