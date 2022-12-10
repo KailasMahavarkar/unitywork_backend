@@ -47,6 +47,8 @@ const baseRegisterObject = {
     required: ["email", "password", "firstname", "lastname", "username"],
 }
 
+
+
 const gigSchema = {
     create: {
         type: "object",
@@ -73,6 +75,24 @@ const gigSchema = {
     delete: baseGigValidatorObject,
 }
 
+const validationSchema = {
+    create: {
+        type: "object",
+        properties: {
+            firstname: { type: "string" },
+            lastname: { type: "string" },
+            about: { type: "string" },
+            email: { type: "string" },
+            govtIssuedId: { type: "string" },
+            selfieGovtIssuedId: { type: "string" },
+            country: { type: "string" },
+        },
+        additionalProperties: false,
+        required: [
+            "firstname", "lastname", "about", "email", "govtIssuedId", "selfieGovtIssuedId", "country"
+        ]
+    }
+}
 
 const authSchema = {
     login: baseLoginObject,
@@ -93,6 +113,12 @@ const authAJV = {
     login: (data) => ajv.validate(authSchema.login, data),
     register: (data) => ajv.validate(authSchema.register, data),
 }
+
+// seller verification validators
+const verificationAJV = {
+    create: (data) => ajv.validate(validationSchema.create, data),
+}
+
 
 
 
@@ -117,6 +143,7 @@ module.exports = {
     ajv,
     gigAJV,
     authAJV,
+    verificationAJV,
     gigSchema,
     handleAJVError
 }

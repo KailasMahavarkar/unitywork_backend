@@ -1,8 +1,6 @@
 const GigModel = require("../../models/gigModel");
 const UserModel = require("../../models/userModel");
 const { gigAJV, handleAJVError } = require("../ajvHelper");
-const { v4: uuidv4 } = require('uuid');
-
 
 const createGig = async (req, res) => {
 

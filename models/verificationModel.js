@@ -1,56 +1,44 @@
 const mongoose = require('mongoose');
 
-
-const tempUserSchema = {
+const chatModelSchema = {
     _id: { type: mongoose.Types.ObjectId, auto: true },
-    token: {
+
+    sellerId: {
         type: String,
         required: true,
     },
+
     firstname: {
         type: String,
         required: true,
     },
+
     lastname: {
         type: String,
         required: true,
     },
-    username: {
+
+    country: {
         type: String,
         required: true,
-        unique: true,
     },
+
     email: {
         type: String,
         required: true,
-        unique: true,
     },
-    password: {
+
+    govtIssuedId: {
         type: String,
         required: true,
     },
-    status: {
+
+    selfieGovtIssuedId: {
         type: String,
         required: true,
-        enum: ['pending', 'banned', 'expired'],
-        default: 'pending',
     },
-    attempts: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    role: {
-        type: String,
-        required: true,
-        default: "member", // other roles are buddy and admin
-    },
+
     createTS: {
-        type: Number,
-        required: true,
-        default: Date.now(),
-    },
-    expireTS: {
         type: Number,
         required: true,
         default: Date.now(),
@@ -60,11 +48,10 @@ const tempUserSchema = {
         required: true,
         default: Date.now(),
     },
-
 }
 
 
 // create index for apikey
-const TempUserModel = mongoose.model('temp', tempUserSchema);
+const ChatModel = mongoose.model('Chat', chatModelSchema);
 
-module.exports = TempUserModel;
+module.exports = ChatModel;

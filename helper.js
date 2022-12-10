@@ -2,6 +2,7 @@ const env = require('./env');
 const uuidv4 = require('uuid').v4;
 
 
+
 const isWindows = env.MACHINE === "windows";
 
 const getQuery = (req) => {
@@ -103,6 +104,51 @@ const showAJVErrors = (errors) => {
     });
 };
 
+const useRouter = (routes = []) => {
+    const express = require('express');
+    const router = express.Router();
+
+    routes.forEach(route => {
+
+        const validMethods = ["get", "post", "put", "delete", "patch"];
+
+        if (typeof route.controller !== "function") {
+            throw new Error("Controller must be a function");
+        }
+
+        if (route.middlewares && !Array.isArray(route.middlewares)) {
+            throw new Error("Middlewares must be an array");
+        }
+
+        if (typeof route.path !== "string") {
+            throw new Error("Path must be a string");
+        }
+
+        if (typeof route.method !== "string") {
+            throw new Error("Method must be a string");
+        }
+
+        if (!validMethods.includes(route.method)) {
+            throw new Error("Method must be a valid method");
+        }
+
+        if (route.middlewares) {
+            router[route.method](
+                route.path,
+                route.middlewares,
+                route.controller
+            )
+        } else {
+            router[route.method](
+                route.path,
+                route.controller
+            )
+        }
+    })
+
+    return router;
+}
+
 module.exports = {
     isWindows,
     getQuery,
@@ -115,6 +161,7 @@ module.exports = {
     isEmpty,
     showError,
     showAJVErrors,
+    useRouter
 }
 
 

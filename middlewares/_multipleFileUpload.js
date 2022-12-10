@@ -2,13 +2,14 @@ const { createReadStream } = require('streamifier');
 const cloudinary = require('../cloudinary');
 
 
-const _singleFileUpload = async (req, res, next) => {
+const _multipleFileUpload = async (req, res, next) => {
     console.log("starting ... single upload --")
     try {
 
         let streamUpload = (req) => {
             // eslint-disable-next-line no-undef
             return new Promise((resolve, reject) => {
+
                 let stream = cloudinary.uploader.upload_stream(
                     {
                         folder: "fynd",
@@ -22,8 +23,15 @@ const _singleFileUpload = async (req, res, next) => {
                     }
                 );
 
-                createReadStream(req.file.buffer)
-                    .pipe(stream);
+                // create multiple streams
+
+                for (let i = 0; i < req.files.length; i++) {
+                    createReadStream(req
+                        .files[i].buffer)
+                        .pipe(stream);
+                }
+
+
             });
         };
 
@@ -31,20 +39,20 @@ const _singleFileUpload = async (req, res, next) => {
             return await streamUpload(req);
         }
 
-        req.singleImage = await upload(req)
+        req.multipleImages = await upload(req)
 
         console.log("leaving ... single upload --")
         next()
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             msg: "Cloudinary Error Uploading Image",
-            error: error.message,
-            status: "exited"
+            error: "SE_M_SINGLE_FILE_UPLOAD_01",
         })
     }
 
 };
 
 
-module.exports = _singleFileUpload;
+module.exports = _multipleFileUpload;

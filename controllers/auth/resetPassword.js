@@ -10,8 +10,8 @@ const sendPasswordOTP = async (token, email) => {
     const bindedTemplate = await bindTemplate("reset", {
         company: "unitywork.io",
         href: withMode({
-            dev: `http://localhost:3000/password-reset?token=${token}`,
-            prod: `https://unitywork.io/password-reset?token=${token}`,
+            dev: `http://localhost:3000/reset-password?token=${token}`,
+            prod: `https://unitywork.io/reset-password?token=${token}`,
         }),
     });
 
@@ -33,7 +33,45 @@ const sendPasswordOTP = async (token, email) => {
 
 const resetPassword = async (req, res) => {
     const email = req.body.email;
-    // const username = req.body.username;
+
+    const token = req.body.token;
+    const password = req.body.password;
+
+    if (token && password) {
+        try {
+            const user
+                = await UserModel.findOne({
+                    resetToken: token,
+                });
+
+            if (!user?._id) {
+                return res.status(400).send({
+                    msg: "invalid token",
+                    status: "failed",
+                });
+            }
+
+            // update password
+            user.password = password;
+
+            // remove token
+            user.resetToken = null;
+
+            // save user
+            await user.save();
+
+            return res.status(200).send({
+                msg: "password updated",
+                status: "success",
+            });
+        } catch (error) {
+            return res.status(500).send({
+                msg: "error updating password",
+                status: "exited",
+                error: showError(error),
+            });
+        }
+    }
 
     // generate a random password
     const resetToken = randomToken();
@@ -81,5 +119,4 @@ const resetPassword = async (req, res) => {
 
 
 // module.exports = userRegister;
-
 module.exports = resetPassword;

@@ -3,6 +3,10 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const userSchema = {
     _id: { type: ObjectId, auto: true },
+    avatar: {
+        type: String,
+        required: false,
+    },
     firstname: {
         type: String,
         required: true,
@@ -22,6 +26,25 @@ const userSchema = {
         required: true,
         default: "india"
     },
+
+    education: {
+        type: String,
+        required: false,
+        default: ""
+    },
+
+    job: {
+        type: String,
+        required: false,
+        default: ""
+    },
+
+    about: {
+        type: String,
+        required: false,
+        default: ""
+    },
+
 
     status: {
         type: String,
@@ -111,6 +134,20 @@ const userSchema = {
         default: {
             gigCreatedCount: 0,
             gigCreatedTodayCount: 0,
+        }
+    },
+    socials: {
+        type: Object,
+        required: false,
+        default: {
+            github: "",
+            instagram: "",
+            facebook: "",
+            twitter: "",
+            behance: "",
+            youtube: "",
+            linkedin: "",
+            discord: "",
         }
     }
 }

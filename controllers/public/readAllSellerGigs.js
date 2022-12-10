@@ -3,8 +3,7 @@ const GigModel = require("../../models/gigModel");
 
 const readAllSellerGigs = async (req, res) => {
 
-    const tokenData = res.locals.tokenData
-    const sellerId = tokenData._id;
+    const sellerId = req.params.sellerId;
 
     try {
         const user = await UserModel.findById({
@@ -47,7 +46,6 @@ const readAllSellerGigs = async (req, res) => {
         })
 
     } catch (error) {
-
         return res.status(500).send({
             message: "Error occured while fetching gigs"
         })

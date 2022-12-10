@@ -1,4 +1,3 @@
-const express = require('express');
 const userRegister = require("../controllers/auth/userRegister");
 const userLogin = require("../controllers/auth/userLogin");
 const mailVerify = require('../controllers/auth/verifyMailToken');
@@ -13,41 +12,107 @@ const searchGigs = require('../controllers/public/searchGigs');
 const renewToken = require("../controllers/auth/renewToken");
 const resetPassword = require('../controllers/auth/resetPassword');
 
+
+const deleteImageCloudinary = require('../controllers/cloudinary/deleteImageCloudinary');
+const uploadImageCloudinary = require('../controllers/cloudinary/uploadImageCloudinary');
+const readImageCloudinary = require('../controllers/cloudinary/readImageCloudinary');
+const { useRouter } = require('../helper');
+
 const upload = multer({})
-const router = express.Router();
 
+const cloudinaryRoutes = [
+    {
+        // handle image upload to cloudinary
+        path: "/cloudinary",
+        method: 'post',
+        middlewares: [
+            upload.single('file'),
+            _singleFileUpload
+        ],
+        controller: uploadImageCloudinary,
+    },
+    {
+        // delete image from cloudinary
+        path: "/cloudinary",
+        method: 'delete',
+        controller: deleteImageCloudinary,
+    },
+    {
+        // read image from cloudinary
+        path: "/cloudinary",
+        method: 'get',
+        controller: readImageCloudinary,
+    }
+]
 
-// AUTH ROUTES
-router.post('/auth/register', userRegister);
-router.post('/auth/login', userLogin);
-router.post('/auth/mailverify', mailVerify);
-router.post('/auth/refresh', renewToken);
-router.post('/auth/reset', resetPassword);
+const authRoutes = [
+    {
+        // register a new user
+        path: '/auth/register',
+        method: 'post',
+        controller: userRegister
+    },
+    {
+        // login a user
+        path: '/auth/login',
+        method: 'post',
+        controller: userLogin
+    },
+    {
+        // verify mail token
+        path: '/auth/mailverify',
+        method: 'post',
+        controller: mailVerify
+    },
+    {
+        // renew token
+        path: '/auth/refresh',
+        method: 'post',
+        controller: renewToken
+    },
+    {
+        // reset password
+        path: '/auth/reset',
+        method: 'post',
+        controller: resetPassword
+    },
+]
 
+const sellerRoutes = [
+    {
+        path: '/seller/:sellerId/gigs',
+        method: 'get',
+        controller: readAllSellerGigs
+    },
+]
 
-// public routes for NON-login user
-router.get('/api/seller/:sellerId/gigs', readAllSellerGigs);
+const gigRoutes = [
+    {
+        // single listing
+        path: '/gigs/:id',
+        method: 'get',
+        controller: singleListing
+    },
+    {
+        // all gigs
+        path: '/gigs',
+        method: 'get',
+        controller: gigListing
+    },
+    {
+        // search gigs
+        path: '/search',
+        method: 'get',
+        controller: searchGigs
+    },
+]
 
-
-// gig based routes
-router.get('/gigs/:id', singleListing)
-router.get('/gigs', gigListing);
-router.get('/search', searchGigs);
-
-
-router
-    .route("/blog/uploader")
-    .post(upload.single("image"), _singleFileUpload, (req, res) => {
-        if (typeof req.singleImage.secure_url === 'string') {
-            return res.status(200).json({
-                success: 1,
-                url: req.singleImage.secure_url
-            });
-        }
-        return res.status(400).json({
-            msg: "insert image error"
-        });
-    });
+const router = useRouter([
+    ...authRoutes,
+    ...sellerRoutes,
+    ...gigRoutes,
+    ...cloudinaryRoutes
+])
 
 
 module.exports = router;

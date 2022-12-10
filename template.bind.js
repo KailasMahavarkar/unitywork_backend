@@ -6,8 +6,6 @@ const templates = require('./templates/template');
 const ajv = new Ajv();
 
 async function bindTemplate(template, obj) {
-
-
     // check if template exists
     if (!templates[template]) {
         return {
@@ -22,9 +20,6 @@ async function bindTemplate(template, obj) {
     const schema = templates[template]["schema"];
     const templateFunc = templates[template]["template"];
     const plaintextFunc = templates[template]["plaintext"];
-
-
-
 
     const validate = ajv.compile(schema);
     const valid = validate(obj);

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { ObjectId } = mongoose.Schema.Types;
 
 const chatModelSchema = {
     _id: { type: mongoose.Types.ObjectId, auto: true },

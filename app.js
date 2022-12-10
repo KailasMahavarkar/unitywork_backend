@@ -16,7 +16,7 @@ const compression = require('compression');
 const app = express();
 
 // set json limit
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json({ limit: "3mb" }));
 app.set('json spaces', 4);
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
