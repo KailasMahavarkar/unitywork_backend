@@ -7,9 +7,15 @@ https://github.com/KailasMahavarkar/unitywork_backend
 ## frontend repository link
 https://github.com/KailasMahavarkar/unitywork_frontend
 
-## hosted on railway.app
-https://unitybackend.up.railway.app/
+## backend hosted on railway.app
+https://unitybackend.up.railway.app
 
-frontend test credentials:
+## frontend hosted on netlify
+https://unityfrontend.netlify.app
+
+
+```
+# frontend test credentials:
 username: kai
 password: 123
+```
