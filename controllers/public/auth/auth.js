@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const env = require('../../env');
+const env = require('../../../env');
 // generate new access token
 const generateAccessToken = (payload) => {
     delete payload.password;

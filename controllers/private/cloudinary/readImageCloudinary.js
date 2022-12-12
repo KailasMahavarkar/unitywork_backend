@@ -1,4 +1,4 @@
-const cloudinary = require('../../cloudinary');
+const cloudinary = require('../../../cloudinary');
 
 const readImageCloudinary = async (req, res) => {
     const imageId = req.body.publicId || req.body.imageId

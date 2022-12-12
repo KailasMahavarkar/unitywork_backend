@@ -1,66 +1,53 @@
-const readAllSellerGigs = require('../controllers/public/readAllSellerGigs');
-const createGig = require('../controllers/seller/createGig');
-const deleteGIG = require('../controllers/seller/deleteGig');
-const changeGigStatus = require('../controllers/seller/changeGigStatus');
+const createGig = require('../controllers/private/sellers/createGig');
+const deleteGIG = require('../controllers/private/sellers/deleteGig');
+const changeGigStatus = require('../controllers/private/sellers/changeGigStatus');
+const updateSocials = require('../controllers/private/sellers/updateSocials');
+const { updateSellerProfile } = require('../controllers/private/sellers/profile');
+
+
+const _singleFileUpload = require('../middlewares/_singleFileUpload');
+const deleteImageCloudinary = require('../controllers/private/cloudinary/deleteImageCloudinary');
+const uploadImageCloudinary = require('../controllers/private/cloudinary/uploadImageCloudinary');
+const readImageCloudinary = require('../controllers/private/cloudinary/readImageCloudinary');
+
+const {
+    createVerification,
+    getVerification,
+    getAllVerifications,
+    changeVerificationStatus,
+} = require('../controllers/private/sellers/verification');
+
 const _authToken = require('../middlewares/_authToken');
-const updateSocials = require('../controllers/seller/updateSocials');
-const getSocials = require('../controllers/seller/getSocials');
+const multer = require('multer');
 
-const getAllSellers = require('../controllers/seller/getAllSellers');
-
-const { useRouter } = require('../helper');
+const router = require('express').Router();
+const upload = multer({})
 
 
-// router for sellers
-const router = useRouter([
-    {
-        // get all gigs of a seller
-        path: '/seller/:sellerId/gigs',
-        method: 'get',
-        controller: readAllSellerGigs,
-        middlewares: [_authToken]
-    },
-    {
-        // change gig status from active to inactive (vice versa)
-        path: '/seller/gig/status',
-        method: 'patch',
-        controller: changeGigStatus,
-    },
-    {
-        // create a new gig
-        path: '/seller/gig',
-        method: 'post',
-        controller: createGig,
-        middlewares: [_authToken]
-    },
-    {
-        // delete a gig
-        path: '/seller/gigs/:gigId',
-        method: 'delete',
-        controller: deleteGIG,
-        middlewares: [_authToken]
-    },
-    {
-        // update socials
-        path: '/seller/socials',
-        method: 'patch',
-        controller: updateSocials,
-        middlewares: [_authToken]
-    },
-    {
-        // get socials
-        path: '/seller/socials',
-        method: 'get',
-        controller: getSocials,
-        middlewares: [_authToken]
-    },
-    {
-        // get all seller
-        path: '/sellers',
-        method: 'get',
-        controller: getAllSellers,
-    }
-])
+// ----------------- cloudinary ROUTES ----------------- //
+router.post('/cloudinary', _authToken, upload.single('file'), _singleFileUpload, uploadImageCloudinary);
+router.delete('/cloudinary', _authToken, deleteImageCloudinary);
+router.get('/cloudinary', _authToken, readImageCloudinary);
+
+// ----------------- Seller ROUTES ----------------- //
+router.post('/seller/gig', _authToken, createGig);
+router.delete('/seller/gig', _authToken, deleteGIG);
+
+router.patch('/seller/gig/status', _authToken, changeGigStatus);
+router.patch('/seller/socials', _authToken, updateSocials);
+
+
+// ----------------- Seller Verification ROUTES ----------------- //
+router.post('/seller/verification', _authToken, createVerification);
+router.get('/seller/verification', _authToken, getVerification);
+router.patch('/seller/status', _authToken, changeVerificationStatus);
+
+// get all verifications
+router.get('/seller/verifications', _authToken, getAllVerifications);
+
+
+// get seller profile
+router.patch('/seller/profile', _authToken, updateSellerProfile);
 
 
 module.exports = router;

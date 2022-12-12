@@ -1,13 +1,19 @@
-const UserModel = require('../../models/userModel');
+const UserModel = require('../../../models/userModel');
 
-const getSocials = async (req, res) => {
-    const tokenData = res.locals.tokenData
-    const sellerId = tokenData._id;
+const readSellerSocials = async (req, res) => {
+    const username = req.params.username;
+
+    if (!username) {
+        return res.status(400).json({
+            message: "username is not provided",
+            status: "failed"
+        })
+    }
 
     try {
-        const fetchResult = await UserModel.findById(
+        const fetchResult = await UserModel.findOne(
             {
-                _id: sellerId
+                username: username
             },
             {
                 socials: 1
@@ -23,6 +29,7 @@ const getSocials = async (req, res) => {
         })
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             msg: "Some error occurred while updating the socials.",
             status: "exited"
@@ -30,4 +37,4 @@ const getSocials = async (req, res) => {
     }
 }
 
-module.exports = getSocials;
+module.exports = readSellerSocials;

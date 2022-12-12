@@ -1,4 +1,4 @@
-const cloudinary = require('../../cloudinary');
+const cloudinary = require('../../../cloudinary');
 
 const deleteImageCloudinary = async (req, res) => {
     const imageId = req.query.publicId || req.body.publicId;

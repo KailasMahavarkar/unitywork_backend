@@ -1,4 +1,4 @@
-const GigModel = require("../../models/gigModel");
+const GigModel = require("../../../models/gigModel");
 
 const singleListing = async (req, res) => {
     try {

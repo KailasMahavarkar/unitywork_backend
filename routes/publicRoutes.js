@@ -1,118 +1,43 @@
-const userRegister = require("../controllers/auth/userRegister");
-const userLogin = require("../controllers/auth/userLogin");
-const mailVerify = require('../controllers/auth/verifyMailToken');
+const userRegister = require("../controllers/public/auth/userRegister");
+const userLogin = require("../controllers/public/auth/userLogin");
+const mailVerify = require('../controllers/public/auth/verifyMailToken');
 
-const readAllSellerGigs = require('../controllers/public/readAllSellerGigs');
-const gigListing = require('../controllers/public/gigListing');
+const readSellerGigs = require('../controllers/public/sellers/readSellerGigs');
+const gigListing = require('../controllers/public/gigs/gigsListing');
 
-const _singleFileUpload = require('../middlewares/_singleFileUpload');
-const multer = require('multer');
-const singleListing = require('../controllers/public/singleListing');
-const searchGigs = require('../controllers/public/searchGigs');
-const renewToken = require("../controllers/auth/renewToken");
-const resetPassword = require('../controllers/auth/resetPassword');
+const singleListing = require('../controllers/public/gigs/singleListing');
+const searchGigs = require('../controllers/public/gigs/searchGigs');
+const renewToken = require("../controllers/public/auth/renewToken");
+const resetPassword = require('../controllers/public/auth/resetPassword');
+const { readSellerProfile } = require('../controllers/private/sellers/profile');
+const readSellerSocials = require("../controllers/public/sellers/readSellerSocials");
+const readAllSellers = require("../controllers/private/sellers/readAllSellers");
+const searchSeller = require("../controllers/public/sellers/searchSeller");
+const express = require('express');
+
+// use express router
+const router = express.Router();
+
+// ----------------- Auth ROUTES ----------------- //
+router.post('/auth/register', userRegister);
+router.post('/auth/login', userLogin);
+router.post('/auth/mailverify', mailVerify);
+router.post('/auth/refresh', renewToken);
+router.post('/auth/reset', resetPassword);
 
 
-const deleteImageCloudinary = require('../controllers/cloudinary/deleteImageCloudinary');
-const uploadImageCloudinary = require('../controllers/cloudinary/uploadImageCloudinary');
-const readImageCloudinary = require('../controllers/cloudinary/readImageCloudinary');
-const { useRouter } = require('../helper');
+// ----------------- Seller ROUTES ----------------- //
+router.get('/sellers', readAllSellers);
+router.get('/sellers/search', searchSeller);
+router.get('/seller/:username/gigs', readSellerGigs);
+router.get('/seller/:username/socials', readSellerSocials);
+router.get('/seller/:username/profile', readSellerProfile);
 
-const upload = multer({})
 
-const cloudinaryRoutes = [
-    {
-        // handle image upload to cloudinary
-        path: "/cloudinary",
-        method: 'post',
-        middlewares: [
-            upload.single('file'),
-            _singleFileUpload
-        ],
-        controller: uploadImageCloudinary,
-    },
-    {
-        // delete image from cloudinary
-        path: "/cloudinary",
-        method: 'delete',
-        controller: deleteImageCloudinary,
-    },
-    {
-        // read image from cloudinary
-        path: "/cloudinary",
-        method: 'get',
-        controller: readImageCloudinary,
-    }
-]
 
-const authRoutes = [
-    {
-        // register a new user
-        path: '/auth/register',
-        method: 'post',
-        controller: userRegister
-    },
-    {
-        // login a user
-        path: '/auth/login',
-        method: 'post',
-        controller: userLogin
-    },
-    {
-        // verify mail token
-        path: '/auth/mailverify',
-        method: 'post',
-        controller: mailVerify
-    },
-    {
-        // renew token
-        path: '/auth/refresh',
-        method: 'post',
-        controller: renewToken
-    },
-    {
-        // reset password
-        path: '/auth/reset',
-        method: 'post',
-        controller: resetPassword
-    },
-]
-
-const sellerRoutes = [
-    {
-        path: '/seller/:sellerId/gigs',
-        method: 'get',
-        controller: readAllSellerGigs
-    },
-]
-
-const gigRoutes = [
-    {
-        // single listing
-        path: '/gigs/:id',
-        method: 'get',
-        controller: singleListing
-    },
-    {
-        // all gigs
-        path: '/gigs',
-        method: 'get',
-        controller: gigListing
-    },
-    {
-        // search gigs
-        path: '/search',
-        method: 'get',
-        controller: searchGigs
-    },
-]
-
-const router = useRouter([
-    ...authRoutes,
-    ...sellerRoutes,
-    ...gigRoutes,
-    ...cloudinaryRoutes
-])
-
+// ----------------- Gigs ROUTES ----------------- //
+router.get('/gigs', gigListing);
+router.get('/gigs/search', searchGigs);
+router.get('/gigs/:id', singleListing);
 
 module.exports = router;

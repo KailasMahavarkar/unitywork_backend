@@ -4,7 +4,7 @@
 // 2. change gig delivery time
 // 3. change gig delivery method
 
-const GigModel = require("../../models/gigModel");
+const GigModel = require("../../../models/gigModel");
 
 const changeGigStatus = async (req, res) => {
 

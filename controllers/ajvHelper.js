@@ -81,15 +81,43 @@ const validationSchema = {
         properties: {
             firstname: { type: "string" },
             lastname: { type: "string" },
-            about: { type: "string" },
             email: { type: "string" },
-            govtIssuedId: { type: "string" },
-            selfieGovtIssuedId: { type: "string" },
+            description: { type: "string" },
+
+            govtIdCardPublicId: { type: "string" },
+            govtIdCardSecureUrl: { type: "string" },
+            selfieGovtIdCardPublicId: { type: "string" },
+            selfieGovtIdCardSecureUrl: { type: "string" },
             country: { type: "string" },
         },
         additionalProperties: false,
         required: [
-            "firstname", "lastname", "about", "email", "govtIssuedId", "selfieGovtIssuedId", "country"
+            "firstname", "lastname", "email",
+            "description",
+
+            "country",
+            "govtIdCardPublicId", "govtIdCardSecureUrl",
+            "selfieGovtIdCardPublicId", "selfieGovtIdCardSecureUrl",
+        ]
+    }
+}
+
+
+const profileSchema = {
+    update: {
+        type: "object",
+        properties: {
+            firstname: { type: "string" },
+            lastname: { type: "string" },
+            description: { type: "string" },
+            location: { type: "string" },
+            education: { type: "string" },
+            job: { type: "string" },
+            avatar: { type: "object" },
+        },
+        additionalProperties: false,
+        required: [
+            "firstname", "lastname", "description", "location", "education", "job", "avatar"
         ]
     }
 }
@@ -119,6 +147,11 @@ const verificationAJV = {
     create: (data) => ajv.validate(validationSchema.create, data),
 }
 
+// profile validators
+const profileAJV = {
+    update: (data) => ajv.validate(profileSchema.update, data),
+}
+
 
 
 
@@ -143,6 +176,7 @@ module.exports = {
     ajv,
     gigAJV,
     authAJV,
+    profileAJV,
     verificationAJV,
     gigSchema,
     handleAJVError

@@ -22,6 +22,7 @@
 		"crypto-js": "^4.1.1",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
+		"filehound": "^1.17.6",
 		"js-sha512": "^0.8.0",
 		"jsonwebtoken": "^8.5.1",
 		"kleur": "^4.1.5",

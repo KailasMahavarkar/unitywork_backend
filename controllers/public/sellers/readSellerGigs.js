@@ -1,13 +1,20 @@
-const UserModel = require("../../models/userModel");
-const GigModel = require("../../models/gigModel");
+const UserModel = require("../../../models/userModel");
+const GigModel = require("../../../models/gigModel");
 
-const readAllSellerGigs = async (req, res) => {
+const readSellerGigs = async (req, res) => {
 
-    const sellerId = req.params.sellerId;
+    const username = req.params.username;
+
+    if (!username) {
+        return res.status(401).json({
+            message: "username is not provided",
+            status: "failed"
+        })
+    }
 
     try {
-        const user = await UserModel.findById({
-            _id: sellerId
+        const user = await UserModel.findOne({
+            username: username
         })
 
         const userGigs = user.gigs;
@@ -46,8 +53,11 @@ const readAllSellerGigs = async (req, res) => {
         })
 
     } catch (error) {
+
         return res.status(500).send({
-            message: "Error occured while fetching gigs"
+            message: "Seller Gig read exited with error",
+            error: error.message,
+            status: "exited"
         })
     }
 
@@ -55,4 +65,4 @@ const readAllSellerGigs = async (req, res) => {
 }
 
 
-module.exports = readAllSellerGigs
+module.exports = readSellerGigs

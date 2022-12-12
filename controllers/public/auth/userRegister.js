@@ -1,10 +1,10 @@
 
-const UserModel = require("../../models/userModel");
-const { randomToken, runDev, showError, withMode } = require("../../helper");
-const TempUserModel = require("../../models/tempUserModel");
-const bindTemplate = require("../../template.bind");
-const sendEmail = require("../../mailer");
-const { authAJV, handleAJVError } = require("../ajvHelper");
+const UserModel = require("../../../models/userModel");
+const { randomToken, runDev, showError, withMode } = require("../../../helper");
+const TempUserModel = require("../../../models/tempUserModel");
+const bindTemplate = require("../../../template.bind");
+const sendEmail = require("../../../mailer");
+const { authAJV, handleAJVError } = require("../../ajvHelper");
 
 
 const MAIL_OTP_EXPIRY_IN_MINS = 5;

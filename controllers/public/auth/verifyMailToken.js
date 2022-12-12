@@ -1,6 +1,6 @@
-const UserModel = require("../../models/userModel");
+const UserModel = require("../../../models/userModel");
 const { randomUUID } = require('crypto');
-const TempUserModel = require('../../models/tempUserModel');
+const TempUserModel = require('../../../models/tempUserModel');
 
 const mailVerify = async (req, res) => {
     // get token by params

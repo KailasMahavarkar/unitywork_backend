@@ -8,6 +8,14 @@ const chatModelSchema = {
         required: true,
     },
 
+    
+
+    verificationStatus: {
+        type: String,
+        required: true,
+        enum: ["pending", "approved", "rejected"],
+    },
+
     firstname: {
         type: String,
         required: true,
@@ -28,12 +36,22 @@ const chatModelSchema = {
         required: true,
     },
 
-    govtIssuedId: {
+    govtIdCardSecureUrl: {
         type: String,
         required: true,
     },
 
-    selfieGovtIssuedId: {
+    govtIdCardPublicId: {
+        type: String,
+        required: true,
+    },
+
+    selfieGovtIdCardSecureUrl: {
+        type: String,
+        required: true,
+    },
+
+    selfieGovtIdCardPublicId: {
         type: String,
         required: true,
     },

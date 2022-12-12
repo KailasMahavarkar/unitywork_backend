@@ -4,8 +4,12 @@ const { ObjectId } = mongoose.Schema.Types;
 const userSchema = {
     _id: { type: ObjectId, auto: true },
     avatar: {
-        type: String,
+        type: Object,
         required: false,
+        default: {
+            secureUrl: "",
+            publicId: ""
+        }
     },
     firstname: {
         type: String,
@@ -27,6 +31,12 @@ const userSchema = {
         default: "india"
     },
 
+    location: {
+        type: String,
+        required: false,
+        default: ""
+    },
+
     education: {
         type: String,
         required: false,
@@ -39,7 +49,7 @@ const userSchema = {
         default: ""
     },
 
-    about: {
+    description: {
         type: String,
         required: false,
         default: ""
@@ -148,6 +158,23 @@ const userSchema = {
             youtube: "",
             linkedin: "",
             discord: "",
+        }
+    },
+
+    verification: {
+        type: Object,
+        required: false,
+        default: {
+            firstname: "",
+            lastname: "",
+            country: "",
+            email: "",
+            description: "",
+            verificationStatus: "created",
+            govtIdCardSecureUrl: "",
+            govtIdCardPublicId: "",
+            selfieGovtIdCardSecureUrl: "",
+            selfieGovtIdCardPublicId: "",
         }
     }
 }

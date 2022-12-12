@@ -1,8 +1,7 @@
-const UserModel = require("../../models/userModel");
-const { randomToken, runDev, showError, withMode } = require("../../helper");
-const bindTemplate = require("../../template.bind");
-const sendEmail = require("../../mailer");
-// const env = require("../../env");
+const UserModel = require("../../../models/userModel");
+const { randomToken, runDev, showError, withMode } = require("../../../helper");
+const bindTemplate = require("../../../template.bind");
+const sendEmail = require("../../../mailer");
 
 
 const sendPasswordOTP = async (token, email) => {

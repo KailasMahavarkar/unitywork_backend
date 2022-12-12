@@ -1,6 +1,6 @@
-const UserModel = require('../../models/userModel');
+const UserModel = require('../../../models/userModel');
 
-const getAllSellers = async (req, res) => {
+const readAllSellers = async (req, res) => {
     try {
 
         // get all sellers with at least one gig
@@ -10,6 +10,7 @@ const getAllSellers = async (req, res) => {
                 $exists: true, $not: { $size: 0 },
             },
         }, {
+            username: 1,
             firstname: 1,
             lastname: 1,
             email: 1,
@@ -45,4 +46,4 @@ const getAllSellers = async (req, res) => {
     }
 }
 
-module.exports = getAllSellers;
+module.exports = readAllSellers;

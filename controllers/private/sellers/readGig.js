@@ -1,5 +1,5 @@
-const GigModel = require("../../models/gigModel");
-const { gigAJV, handleAJVError, ajv } = require("../ajvHelper");
+const GigModel = require("../../../models/gigModel");
+const { gigAJV, handleAJVError, ajv } = require("../../ajvHelper");
 
 const readGIG = async (req, res) => {
     const data = req.body;

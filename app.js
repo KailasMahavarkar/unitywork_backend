@@ -36,20 +36,24 @@ app.use(function (error, req, res, next) {
     }
 });
 
-app.use((req, res, next) => {
+app.use((req, res, hop) => {
+
+    // get prev, next, total, limit, page
+    const { prev, next, total, limit, page } = req.query;
+
     res.locals = {
         'x-api-key': '',
         'x-dev-key': '',
         controls: {
-            prev: 0,
-            next: 0,
-            total: 0,
-            limit: 0,
-            page: 0,
+            prev: prev || 0,
+            next: next || 0,
+            total: total || 0,
+            limit: limit || 0,
+            page: page || 0
         }
     }
 
-    return next();
+    return hop();
 })
 
 

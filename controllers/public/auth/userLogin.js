@@ -1,6 +1,6 @@
-const User = require("../../models/userModel");
-const refreshToken = require('../../models/refreshTokenModel');
-const { authAJV, handleAJVError } = require("../ajvHelper");
+const User = require("../../../models/userModel");
+const refreshToken = require('../../../models/refreshTokenModel');
+const { authAJV, handleAJVError } = require("../../ajvHelper");
 const { generateAccessToken, generateRefreshToken } = require('../auth/auth');
 
 

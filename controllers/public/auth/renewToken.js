@@ -1,8 +1,8 @@
-const RefreshModel = require('../../models/refreshTokenModel');
+const RefreshModel = require('../../../models/refreshTokenModel');
 const { generateAccessToken } = require('../auth/auth');
-const { isEmpty } = require("../../helper");
+const { isEmpty } = require("../../../helper");
 const jwt = require('jsonwebtoken');
-const env = require('../../env');
+const env = require('../../../env');
 
 
 // Renew AccessToken 
