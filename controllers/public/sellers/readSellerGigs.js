@@ -2,7 +2,6 @@ const UserModel = require("../../../models/userModel");
 const GigModel = require("../../../models/gigModel");
 
 const readSellerGigs = async (req, res) => {
-
     const username = req.params.username;
 
     if (!username) {
@@ -38,6 +37,9 @@ const readSellerGigs = async (req, res) => {
                 tags: 1,
                 verificationStatus: 1
             })
+
+
+
 
             if (gigs) {
                 return res.status(200).json({

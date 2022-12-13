@@ -66,8 +66,8 @@ app.get("/", (req, res) => {
 })
 
 
-app.use('/', publicRoutes);
 app.use('/', privateRoutes);
+app.use('/', publicRoutes);
 
 
 // catch all route

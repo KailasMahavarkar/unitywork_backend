@@ -88,6 +88,8 @@ const createVerification = async (req, res) => {
 const getVerification = async (req, res) => {
     const sellerId = res.locals.tokenData._id;
 
+    console.log("seller -->",sellerId)
+
     try {
         const verification = await UserModel.findOne({
             _id: sellerId

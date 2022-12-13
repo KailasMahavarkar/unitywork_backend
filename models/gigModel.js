@@ -74,6 +74,12 @@ const gigSchema = new mongoose.Schema({
         maxlength: 2100,
     },
 
+    sellerVerified: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+
     verified: {
         type: Boolean,
         required: true,

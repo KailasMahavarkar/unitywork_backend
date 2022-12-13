@@ -39,8 +39,8 @@ router.patch('/seller/socials', _authToken, updateSocials);
 
 
 // ----------------- Seller Verification ROUTES ----------------- //
-router.post('/seller/verification', _authToken, createVerification);
 router.get('/seller/verification', _authToken, getVerification);
+router.post('/seller/verification', _authToken, createVerification);
 router.patch('/seller/status', _authToken, changeVerificationStatus);
 
 // get all verifications
