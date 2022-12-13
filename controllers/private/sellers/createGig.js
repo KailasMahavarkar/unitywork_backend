@@ -29,21 +29,30 @@ const createGig = async (req, res) => {
     const gig = new GigModel({
         ...req.body,
         sellerId: sellerId,
-        sellerName: user.username,
+        sellerUsername: user.username,
         sellerCountry: user.country,
-        status: 'draft',
+        status: 'active',
     });
 
 
-    try {
+    // add gig to seller gigs
+    await UserModel.findOneAndUpdate(
+        {
+            _id: sellerId
+        },
+        {
+            $push: {
+                gigs: gig._id
+            }
+        }
+    )
 
+    try {
         const savedGig = await gig.save();
         res.status(200).json({
             message: "Gig created successfully",
             data: savedGig
         })
-
-
     } catch (error) {
         return res.status(500).send({
             message: error.message || "Some error occurred while creating the Gig.",

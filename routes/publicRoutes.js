@@ -14,6 +14,7 @@ const readSellerSocials = require("../controllers/public/sellers/readSellerSocia
 const readAllSellers = require("../controllers/private/sellers/readAllSellers");
 const searchSeller = require("../controllers/public/sellers/searchSeller");
 const express = require('express');
+const readSeller = require("../controllers/public/sellers/readSeller");
 
 // use express router
 const router = express.Router();
@@ -26,13 +27,15 @@ router.post('/auth/refresh', renewToken);
 router.post('/auth/reset', resetPassword);
 
 
-// ----------------- Seller ROUTES ----------------- //
+// ----------------- Many Seller ROUTES ----------------- //
 router.get('/sellers', readAllSellers);
 router.get('/sellers/search', searchSeller);
+
+// ----------------- Single Seller ROUTES ----------------- //
+router.get('/seller/:username', readSeller);
 router.get('/seller/:username/gigs', readSellerGigs);
 router.get('/seller/:username/socials', readSellerSocials);
 router.get('/seller/:username/profile', readSellerProfile);
-
 
 
 // ----------------- Gigs ROUTES ----------------- //

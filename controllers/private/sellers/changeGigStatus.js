@@ -11,6 +11,7 @@ const changeGigStatus = async (req, res) => {
     // get gig id from params
     const gigId = req.params.gigId || req.body.gigId;
 
+
     if (!gigId) {
         return res.status(400).json({
             message: "gig id is required",
@@ -20,7 +21,6 @@ const changeGigStatus = async (req, res) => {
 
     const gig = await GigModel.findById({
         _id: gigId,
-
     }, {
         status: 1
     })

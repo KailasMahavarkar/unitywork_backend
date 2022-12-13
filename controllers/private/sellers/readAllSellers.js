@@ -2,7 +2,6 @@ const UserModel = require('../../../models/userModel');
 
 const readAllSellers = async (req, res) => {
     try {
-
         // get all sellers with at least one gig
         // and gig status is active
         const sellers = await UserModel.find({
@@ -10,6 +9,7 @@ const readAllSellers = async (req, res) => {
                 $exists: true, $not: { $size: 0 },
             },
         }, {
+            "verification.verificationStatus": 1,
             username: 1,
             firstname: 1,
             lastname: 1,

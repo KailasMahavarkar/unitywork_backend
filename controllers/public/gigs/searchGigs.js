@@ -8,7 +8,7 @@ const searchGigs = async (req, res) => {
 
     // check if query string contains '+'
     if (query.includes('+')) {
-        queryArray = query.split('+');
+        const queryArray = query.split('+');
         parsedQuery = queryArray.join(' ');
     }
 

@@ -1,5 +1,6 @@
 const createGig = require('../controllers/private/sellers/createGig');
 const deleteGIG = require('../controllers/private/sellers/deleteGig');
+const updateGig = require('../controllers/private/sellers/updateGig');
 const changeGigStatus = require('../controllers/private/sellers/changeGigStatus');
 const updateSocials = require('../controllers/private/sellers/updateSocials');
 const { updateSellerProfile } = require('../controllers/private/sellers/profile');
@@ -32,8 +33,8 @@ router.get('/cloudinary', _authToken, readImageCloudinary);
 // ----------------- Seller ROUTES ----------------- //
 router.post('/seller/gig', _authToken, createGig);
 router.delete('/seller/gig', _authToken, deleteGIG);
-
-router.patch('/seller/gig/status', _authToken, changeGigStatus);
+router.patch('/seller/gig/:gigId/status', _authToken, changeGigStatus);
+router.patch('/seller/gig/:gigId', _authToken, updateGig);
 router.patch('/seller/socials', _authToken, updateSocials);
 
 

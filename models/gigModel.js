@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
-const { gigCategoryEnum, gigStatusEnum, gigTimeEnum } = require('./data');
+const { gigCategoryEnum, gigStatusEnum } = require('./data');
 
 const gigSchema = new mongoose.Schema({
     _id: {
@@ -19,7 +19,7 @@ const gigSchema = new mongoose.Schema({
         required: true,
         maxlength: 100,
     },
-    sellerName: {
+    sellerUsername: {
         type: String,
         required: true,
         maxlength: 100,
@@ -29,20 +29,61 @@ const gigSchema = new mongoose.Schema({
         required: true,
         maxlength: 100,
     },
+
+    pricings: {
+        type: Object,
+        default: {
+            basic: {
+                price: 0,
+                deliveryTime: 0,
+                revisions: 0,
+            },
+            standard: {
+                price: 0,
+                deliveryTime: 0,
+                revisions: 0,
+            },
+            premium: {
+                price: 0,
+                deliveryTime: 0,
+                revisions: 0,
+            }
+        }
+    },
+
     images: {
-        type: Array,
-        default: [],
+        type: Object,
+        default: {
+            image1: {
+                secureUrl: "",
+                publicId: "",
+            },
+            image2: {
+                secureUrl: "",
+                publicId: "",
+            },
+            image3: {
+                secureUrl: "",
+                publicId: "",
+            }
+        },
     },
     blog: {
         type: String,
         required: true,
-        maxlength: 1500,
+        maxlength: 2100,
     },
 
     verified: {
         type: Boolean,
         required: true,
         default: false,
+    },
+
+    verificationStatus: {
+        type: String,
+        required: false,
+        default: 'created',
     },
 
     category: {
@@ -54,36 +95,6 @@ const gigSchema = new mongoose.Schema({
         }
     },
 
-    packs: [
-        {
-            name: {
-                type: String,
-                required: true,
-            },
-            price: {
-                type: Number,
-                required: true,
-            },
-            deliveryTime: {
-                type: Number,
-                required: true,
-            },
-            revisions: {
-                type: Number,
-                required: true,
-            },
-        }
-    ],
-    deliveryTime: {
-        type: String,
-        enum: gigTimeEnum,
-        required: true,
-    },
-    deliveryFiles: {
-        type: Array,
-        required: false,
-        default: [],
-    },
     // timestamps
     createdAt: {
         type: Number,
@@ -108,7 +119,7 @@ const gigSchema = new mongoose.Schema({
     },
 
     tags: {
-        type: String,
+        type: Array,
         required: false,
         default: [],
     }

@@ -1,10 +1,5 @@
-const gigCategoryEnum = [
-    'support', 'general', 'programming',
-    'feature', 'error', 'debugging'
-]
 const gigStatusEnum = [
-    'draft', 'active', 'paused',
-    'banned', 'deleted'
+    'active', 'inactive'
 ]
 
 const gigTimeEnum = [
@@ -15,7 +10,7 @@ const gigTimeEnum = [
     '90 days'
 ]
 
-const gigTagsEnum = [
+const gigCategoryEnum = [
     'website-development',
     'website-design',
     'website-maintenance',
@@ -162,6 +157,5 @@ const gigTagsEnum = [
 module.exports = {
     gigCategoryEnum,
     gigStatusEnum,
-    gigTagsEnum,
     gigTimeEnum
 }

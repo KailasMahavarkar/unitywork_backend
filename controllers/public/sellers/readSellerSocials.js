@@ -31,7 +31,7 @@ const readSellerSocials = async (req, res) => {
     } catch (error) {
         console.log(error)
         return res.status(500).json({
-            msg: "Some error occurred while updating the socials.",
+            msg: "Some error occurred while fetching the socials.",
             status: "exited"
         })
     }

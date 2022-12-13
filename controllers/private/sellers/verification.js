@@ -150,6 +150,8 @@ const getAllVerifications = async (req, res) => {
 
 
 const changeVerificationStatus = async (req, res) => {
+
+
     const sellerId = res.locals.tokenData._id;
     const status = req.body.status;
 

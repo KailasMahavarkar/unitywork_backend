@@ -1,28 +1,35 @@
-const { ajv, gigAJV } = require("../../ajvHelper");
 const GigModel = require("../../../models/gigModel");
+const { gigAJV, handleAJVError } = require("../../ajvHelper");
+const UserModel = require("../../../models/userModel");
 
 const updateGIG = async (req, res) => {
 
+    const gigId = req.params.gigId || req.body.gigId;
+    const tokenData = res.locals.tokenData
+    const sellerId = tokenData._id;
 
-    const gigUUID = req.body.gigUUID;
-
-    if (!gigAJV.gigUpdate()) {
-        return res.send({
-            message: ajv.errors[ajv.errors.length - 1].message,
-            status: "failed"
-        })
+    if (!gigAJV.gigCreate(req.body)) {
+        return handleAJVError(res);
     }
 
+    // get sellerId, sellerName, sellerAvatar, sellerCountry from userModel
+    const user = await UserModel.findOne(
+        {
+            _id: sellerId
+        },
+        {
+            _id: 1,
+            username: 1,
+            country: 1
+        }
+    )
 
-    const gig = await GigModel.findByIdAndUpdate(gigUUID, {
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        deliveryTime: req.body.deliveryTime,
-        category: req.body.category,
-        images: req.body.images,
-        tags: req.body.tags,
-        status: req.body.status
+
+    const gig = await GigModel.findByIdAndUpdate(gigId, {
+        ...req.body,
+        sellerId: sellerId,
+        sellerUsername: user.username,
+        sellerCountry: user.country,
     }, {
         new: true
     })
@@ -31,13 +38,13 @@ const updateGIG = async (req, res) => {
 
         if (!gig) {
             return res.status(404).json({
-                message: `Gig with id ${gigUUID} is not found`,
+                message: `Gig with id ${gigId} is not found`,
                 status: "failed"
             })
         }
 
         return res.status(200).json({
-            message: `Gig with id ${gigUUID} is updated`,
+            message: `Gig with id ${gigId} is updated`,
             status: "success"
         })
 

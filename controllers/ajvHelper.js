@@ -1,7 +1,7 @@
 // FILE INTRO: This file contains logic for pre-route schema validations
 
 const AJV = require('ajv');
-const { gigCategoryEnum, gigTimeEnum } = require('../models/data');
+const { gigCategoryEnum } = require('../models/data');
 
 const ajv = new AJV()
 
@@ -47,26 +47,26 @@ const baseRegisterObject = {
     required: ["email", "password", "firstname", "lastname", "username"],
 }
 
-
-
 const gigSchema = {
     create: {
         type: "object",
         properties: {
             title: { type: "string" },
-            images: {
-                type: "array",
-            },
-
-            blog: { type: "string" },
             category: { enum: gigCategoryEnum },
-
-            packs: { type: "array" },
-            deliveryTime: { enum: gigTimeEnum },
-            tags: { type: "string" }
+            tags: { type: "array" },
+            blog: {
+                type: "string",
+                maxLength: 2000
+            },
+            images: {
+                type: "object",
+            },
+            pricings: {
+                type: "object",
+            },
         },
         required: [
-            "title", "images", "blog", "category", "packs", "deliveryTime", "tags"
+            "title", "category", "tags", "blog", "images", "pricings"
         ],
         additionalProperties: false
     },

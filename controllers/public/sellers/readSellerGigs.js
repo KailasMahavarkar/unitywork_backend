@@ -26,14 +26,17 @@ const readSellerGigs = async (req, res) => {
                     $in: userGigs
                 }
             }, {
+                _id: 1,
                 title: 1,
-                thumbnail: 1,
+                images: 1,
                 sellerId: 1,
+                avatar: 1,
                 gigId: 1,
                 status: 1,
                 deliveryTime: 1,
                 category: 1,
                 tags: 1,
+                verificationStatus: 1
             })
 
             if (gigs) {
