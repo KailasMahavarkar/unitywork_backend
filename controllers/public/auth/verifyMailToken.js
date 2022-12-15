@@ -33,6 +33,22 @@ const mailVerify = async (req, res) => {
                     datejoined: Date.now(),
                     apikey: randomUUID().toString().replace(/-/g, ""),
                     status: "active",
+                    verification: {
+                        firstname: "",
+                        lastname: "",
+                        country: "",
+                        email: "",
+                        description: "",
+                        verificationStatus: "created",
+                        govtIdCard: {
+                            secureUrl: "",
+                            publicId: "",
+                        },
+                        selfieGovtIdCard: {
+                            secureUrl: "",
+                            publicId: "",
+                        }
+                    }
                 });
                 await user.save();
 

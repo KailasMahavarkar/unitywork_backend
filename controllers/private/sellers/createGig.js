@@ -19,7 +19,8 @@ const createGig = async (req, res) => {
         {
             _id: 1,
             username: 1,
-            country: 1
+            country: 1,
+            verification: 1
         }
     )
 
@@ -31,6 +32,7 @@ const createGig = async (req, res) => {
         sellerId: sellerId,
         sellerUsername: user.username,
         sellerCountry: user.country,
+        sellerVerified: user.verification.verificationStatus === 'verified' ? true : false,
         status: 'active',
     });
 

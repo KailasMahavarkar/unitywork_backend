@@ -5,7 +5,7 @@ const GigModel = require("../../../models/gigModel");
 const deleteGIG = async (req, res) => {
 
     // get gigId from url
-    const gigId = req.query.id || req.query.gigId;
+    const gigId = req.params.gigId || req.body.gigId;
 
     // if gigId is not provided
     if (!gigId) {

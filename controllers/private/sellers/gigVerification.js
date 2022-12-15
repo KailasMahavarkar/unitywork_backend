@@ -140,9 +140,7 @@ const getAllGigVerifications = async (req, res) => {
         return res.status(200).json({
             message: "Gig verification status",
             status: "success",
-            data: {
-                gigs
-            }
+            data: gigs
         })
     }
     catch (error) {

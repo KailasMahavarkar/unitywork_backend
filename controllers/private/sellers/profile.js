@@ -76,6 +76,7 @@ const readSellerProfile = async (req, res) => {
             username: 1,
             avatar: 1,
             verified: 1,
+            socials: 1
         })
 
         if (!seller) {

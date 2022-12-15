@@ -129,6 +129,8 @@ const getAllSellerVerifications = async (req, res) => {
         const findResult = await UserModel.find({
             sellerId,
             "verification.verificationStatus": "pending"
+        }, {
+            "verification": 1,
         })
 
         if (!findResult) {
@@ -153,8 +155,10 @@ const getAllSellerVerifications = async (req, res) => {
 }
 
 const updateSellerVerification = async (req, res) => {
-    const sellerId = req.params.selledId;
+
+    const sellerId = req.params.sellerId;
     const { status } = req.body;
+
 
     try {
         const updateSeller = await UserModel.findOneAndUpdate(
@@ -171,7 +175,15 @@ const updateSellerVerification = async (req, res) => {
             }
         )
 
-        const gigs = updateSeller.gigs;
+
+        const gigs = updateSeller?.gigs;
+
+        if (!gigs) {
+            return res.json({
+                message: "No gigs found",
+                status: "success"
+            })
+        }
 
         // find all gigs of seller and update verification status
         const updateGigsResult = await GigModel.updateMany(
@@ -203,8 +215,8 @@ const updateSellerVerification = async (req, res) => {
             }
         })
 
-
     } catch (error) {
+        console.log("Error -->", error);
         return res.status(500).json({
             message: "Internal server error",
             error: error.message,
