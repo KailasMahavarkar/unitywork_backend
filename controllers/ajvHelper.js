@@ -84,20 +84,15 @@ const validationSchema = {
             email: { type: "string" },
             description: { type: "string" },
 
-            govtIdCardPublicId: { type: "string" },
-            govtIdCardSecureUrl: { type: "string" },
-            selfieGovtIdCardPublicId: { type: "string" },
-            selfieGovtIdCardSecureUrl: { type: "string" },
+            govtIdCard: { type: "object" },
+            selfieGovtIdCard: { type: "object" },
             country: { type: "string" },
         },
         additionalProperties: false,
         required: [
             "firstname", "lastname", "email",
             "description",
-
-            "country",
-            "govtIdCardPublicId", "govtIdCardSecureUrl",
-            "selfieGovtIdCardPublicId", "selfieGovtIdCardSecureUrl",
+            "country", "govtIdCard", "selfieGovtIdCard"
         ]
     }
 }

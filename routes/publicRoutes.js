@@ -15,6 +15,10 @@ const readAllSellers = require("../controllers/private/sellers/readAllSellers");
 const searchSeller = require("../controllers/public/sellers/searchSeller");
 const express = require('express');
 const readSeller = require("../controllers/public/sellers/readSeller");
+const _authToken = require("../middlewares/_authToken");
+const { getSellerVerification, getAllSellerVerifications } = require("../controllers/private/sellers/sellerVerification");
+const _roleCheckAdmin = require("../middlewares/_roleCheckAdmin");
+const { getGigVerification } = require("../controllers/private/sellers/gigVerification");
 
 // use express router
 const router = express.Router();
@@ -42,5 +46,16 @@ router.get('/seller/:username/profile', readSellerProfile);
 router.get('/gigs', gigListing);
 router.get('/gigs/search', searchGigs);
 router.get('/gigs/:id', singleListing);
+
+
+// -----------------  Verification routes ----------------- //
+router.get('/seller/:sellerId/verification', _authToken, getSellerVerification);
+router.get('/seller/all-verification', _authToken, _roleCheckAdmin, getAllSellerVerifications);
+
+
+router.get('/gig/:gigId/verification', _authToken, getGigVerification);
+router.get('/gig/all-verification', _authToken, _roleCheckAdmin, );
+
+
 
 module.exports = router;

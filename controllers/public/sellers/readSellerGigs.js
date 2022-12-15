@@ -35,7 +35,7 @@ const readSellerGigs = async (req, res) => {
                 deliveryTime: 1,
                 category: 1,
                 tags: 1,
-                verificationStatus: 1
+                verification: 1
             })
 
 

@@ -80,16 +80,10 @@ const gigSchema = new mongoose.Schema({
         default: false,
     },
 
-    verified: {
-        type: Boolean,
-        required: true,
-        default: false,
-    },
-
-    verificationStatus: {
+    verification: {
         type: String,
-        required: false,
-        default: 'created',
+        required: true,
+        default: "created"
     },
 
     category: {

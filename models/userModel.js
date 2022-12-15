@@ -171,10 +171,14 @@ const userSchema = {
             email: "",
             description: "",
             verificationStatus: "created",
-            govtIdCardSecureUrl: "",
-            govtIdCardPublicId: "",
-            selfieGovtIdCardSecureUrl: "",
-            selfieGovtIdCardPublicId: "",
+            govtIdCard: {
+                secureUrl: "",
+                publicId: "",
+            },
+            selfieGovtIdCard: {
+                secureUrl: "",
+                publicId: "",
+            }
         }
     }
 }

@@ -1,6 +1,11 @@
 const createGig = require('../controllers/private/sellers/createGig');
 const deleteGIG = require('../controllers/private/sellers/deleteGig');
 const updateGig = require('../controllers/private/sellers/updateGig');
+const {
+    createGigVerification,
+    updateGigVerification,
+} = require('../controllers/private/sellers/gigVerification');
+
 const changeGigStatus = require('../controllers/private/sellers/changeGigStatus');
 const updateSocials = require('../controllers/private/sellers/updateSocials');
 const { updateSellerProfile } = require('../controllers/private/sellers/profile');
@@ -12,13 +17,12 @@ const uploadImageCloudinary = require('../controllers/private/cloudinary/uploadI
 const readImageCloudinary = require('../controllers/private/cloudinary/readImageCloudinary');
 
 const {
-    createVerification,
-    getVerification,
-    getAllVerifications,
-    changeVerificationStatus,
-} = require('../controllers/private/sellers/verification');
+    createSellerVerification,
+    updateSellerVerification
+} = require('../controllers/private/sellers/sellerVerification');
 
 const _authToken = require('../middlewares/_authToken');
+const _roleCheckAdmin = require('../middlewares/_roleCheckAdmin');
 const multer = require('multer');
 
 const router = require('express').Router();
@@ -33,22 +37,25 @@ router.get('/cloudinary', _authToken, readImageCloudinary);
 // ----------------- Seller ROUTES ----------------- //
 router.post('/seller/gig', _authToken, createGig);
 router.delete('/seller/gig', _authToken, deleteGIG);
+
 router.patch('/seller/gig/:gigId/status', _authToken, changeGigStatus);
 router.patch('/seller/gig/:gigId', _authToken, updateGig);
 router.patch('/seller/socials', _authToken, updateSocials);
 
 
 // ----------------- Seller Verification ROUTES ----------------- //
-router.get('/seller/verification', _authToken, getVerification);
-router.post('/seller/verification', _authToken, createVerification);
-router.patch('/seller/status', _authToken, changeVerificationStatus);
-
-// get all verifications
-router.get('/seller/verifications', _authToken, getAllVerifications);
-
 
 // get seller profile
 router.patch('/seller/profile', _authToken, updateSellerProfile);
 
 
-module.exports = router;
+// ALL seller verification routes
+router.post('/seller/:sellerId/create-verification', _authToken, createSellerVerification);
+router.patch('/seller/:sellerId/update-verification', _authToken, _roleCheckAdmin, updateSellerVerification); // <-- admin only
+
+
+// update gig verification by admin
+router.post('/gig/:gigId/create-verification', _authToken, createGigVerification);
+router.patch('/gig/:gigId/update-verification', _authToken, _roleCheckAdmin, updateGigVerification); // <-- admin only
+
+module.exports = router; 
