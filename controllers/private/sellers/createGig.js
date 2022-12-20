@@ -44,7 +44,7 @@ const createGig = async (req, res) => {
         },
         {
             $push: {
-                gigs: gig._id
+                gigs: String(gig._id)
             }
         }
     )

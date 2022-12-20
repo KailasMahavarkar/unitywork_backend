@@ -16,10 +16,12 @@ const deleteGIG = async (req, res) => {
         })
     }
 
+
     try {
         const gig = await GigModel.findOne({
             _id: gigId
         })
+
 
         if (!gig) {
             return res.status(400).json({
@@ -30,7 +32,8 @@ const deleteGIG = async (req, res) => {
 
         const sellerName = gig.sellerUsername;
 
-        // update gig array in user model
+
+        // update gig array in user model and remove gigId from it
         const updateResult = await UserModel.findOneAndUpdate(
             {
                 username: sellerName
@@ -39,8 +42,8 @@ const deleteGIG = async (req, res) => {
                 $pull: {
                     gigs: gigId
                 }
-            }
-        )
+            })
+
 
         if (!updateResult) {
             return res.status(400).json({
