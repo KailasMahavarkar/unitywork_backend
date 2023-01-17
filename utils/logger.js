@@ -19,7 +19,7 @@ class loggerClass {
 
 
     success(message) {
-        const messageFormat = `Success Info >> ${timeNow()} >> ${this.filepath} >> ${message}`;
+        const messageFormat = `Success >> ${timeNow()} >> ${this.filepath} >> ${message}`;
         console.log(
             kleur.bgGreen().black().bold(messageFormat),
         );

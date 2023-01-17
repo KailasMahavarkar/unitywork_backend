@@ -4,6 +4,10 @@ const env = {
     PASSWORD_SALT: process.env.PASSWORD_SALT,
     MACHINE: process.env.MACHINE,
     DB_URL: process.env.DB_URL,
+    DOMAIN: {
+        dev: "http://localhost:3000",
+        prod: "https://unityfrontend.netlify.app"
+    },
     REDIS_CONFIG: {
         dev: {
             HOST: process.env.REDIS_DEV_HOST,
