@@ -6,7 +6,7 @@ const env = {
     DB_URL: process.env.DB_URL,
     DOMAIN: {
         dev: "http://localhost:3000",
-        prod: "https://unityfrontend.netlify.app"
+        prod: process.env.DOMAIN
     },
     REDIS_CONFIG: {
         dev: {
