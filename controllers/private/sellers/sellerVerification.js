@@ -194,7 +194,8 @@ const updateSellerVerification = async (req, res) => {
             },
             {
                 $set: {
-                    verification: status
+                    verification: status,
+                    sellerVerified: true
                 }
             }
         )
